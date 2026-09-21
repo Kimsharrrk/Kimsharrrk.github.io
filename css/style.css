@@ -277,26 +277,57 @@ nav a:hover {
 }
 
 /* Projects */
-.project-list {
+/* Projects - Horizontal Marquee (Grid format) */
+.marquee-wrapper {
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    overflow: hidden;
+    padding: 20px 0;
     display: flex;
-    flex-direction: column;
-    gap: var(--gap-xl);
+}
+
+.marquee-track {
+    display: flex;
+    gap: 32px;
+    padding: 0 16px;
+    animation: scroll-left 50s linear infinite;
+    width: max-content;
+}
+
+.marquee-track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes scroll-left {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-50% - 16px)); }
 }
 
 .project-card {
     display: flex;
-    gap: 40px;
-    align-items: center;
-}
-
-.project-thumb {
-    width: 45%;
-    aspect-ratio: 4/3;
-    background-color: var(--bg-sub);
+    flex-direction: column;
+    width: 420px; /* Fixed width for grid card */
+    background-color: var(--bg-main);
     border-radius: 20px;
     border: 1px solid var(--border-light);
     overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    flex-shrink: 0;
+}
+
+.project-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 32px rgba(0,0,0,0.06);
+    border-color: var(--border-hover);
+}
+
+.project-thumb {
+    width: 100%;
+    aspect-ratio: 16/10;
+    background-color: var(--bg-sub);
+    border-bottom: 1px solid var(--border-light);
     position: relative;
+    overflow: hidden;
 }
 
 .project-thumb-placeholder {
@@ -310,7 +341,10 @@ nav a:hover {
 }
 
 .project-content {
-    width: 55%;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 }
 
 .project-meta {
@@ -376,11 +410,13 @@ nav a:hover {
 
 @media (max-width: 900px) {
     .project-card {
-        flex-direction: column;
-        gap: 24px;
+        width: 320px;
     }
-    .project-thumb, .project-content {
-        width: 100%;
+    .project-content {
+        padding: 24px;
+    }
+    .project-title {
+        font-size: 1.5rem;
     }
 }
 

@@ -52,7 +52,7 @@ tl.from('.hero-tag', { y: 20, opacity: 0, duration: 0.6, delay: 0.2 })
 gsap.utils.toArray('section').forEach(section => {
     if(section.classList.contains('hero')) return;
     
-    gsap.from(section.querySelectorAll('.section-title, .project-card, .stack-card, .edu-item, .ending h2, .ending p, .ending a'), {
+    gsap.from(section.querySelectorAll('.section-title, .marquee-wrapper, .stack-card, .edu-item, .ending h2, .ending p, .ending a'), {
         scrollTrigger: {
             trigger: section,
             start: "top 85%",
