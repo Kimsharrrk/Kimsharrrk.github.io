@@ -1,46 +1,22 @@
+/* =====================
+   variables.css
+   ===================== */
 :root {
-    /* Color Palette */
     --bg-main: #ffffff;
-    --bg-sub: #f8f9fa;
+    --bg-sub: #f5f5f7;
     --bg-card: #ffffff;
-    
-    --text-title: #212529;
-    --text-body: #495057;
-    --text-muted: #868e96;
-    
-    --border-light: #e9ecef;
-    --border-hover: #dee2e6;
-    
-    --accent: #2563eb; /* Blue */
+
+    --text-title: #111111;
+    --text-body: #444444;
+    --text-muted: #999999;
+
+    --border-light: #e5e5e5;
+    --border-hover: #cccccc;
+
+    --accent: #2563eb;
     --accent-bg: #eff6ff;
 
-    /* Spacing & Layout */
-    --container-max: 1000px;
+    --container-max: 1100px;
     --section-padding: 120px 0;
-    --gap-sm: 8px;
-    --gap-md: 16px;
-    --gap-lg: 32px;
-    --gap-xl: 64px;
-
-    /* Transitions */
     --transition-fast: 0.2s ease;
-    --transition-slow: 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-@media (prefers-color-scheme: dark) {
-    :root {
-        --bg-main: #0a0a0a;
-        --bg-sub: #121212;
-        --bg-card: #18181b;
-        
-        --text-title: #f8fafc;
-        --text-body: #94a3b8;
-        --text-muted: #64748b;
-        
-        --border-light: #27272a;
-        --border-hover: #3f3f46;
-        
-        --accent: #60a5fa;
-        --accent-bg: rgba(96, 165, 250, 0.1);
-    }
 }
