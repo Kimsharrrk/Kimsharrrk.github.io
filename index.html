@@ -3,699 +3,311 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>김건희 | Software Engineer</title>
+    <title>김건희 | Network & AI System Engineer</title>
     
-    <!-- Pretendard Font (Standard for Clean Korean UI) -->
+    <!-- Pretendard Font -->
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable.css" />
     
-    <!-- Devicon for Tech Stack Icons -->
+    <!-- Devicon -->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
 
-    <style>
-        :root {
-            /* Light, clean color palette */
-            --bg-main: #ffffff;
-            --bg-sub: #f8f9fa;
-            --bg-card: #ffffff;
-            
-            --text-title: #212529;
-            --text-body: #495057;
-            --text-muted: #868e96;
-            
-            --border-light: #e9ecef;
-            --border-hover: #dee2e6;
-            
-            --accent: #3b82f6; /* Soft blue */
-            --accent-bg: #eff6ff;
-        }
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/style.css">
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
-            background-color: var(--bg-main);
-            color: var(--text-body);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-            word-break: keep-all;
-        }
-
-        ::selection {
-            background-color: var(--accent-bg);
-            color: var(--accent);
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-        
-        a:hover {
-            color: var(--accent);
-        }
-
-        /* Container */
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        /* Header */
-        header {
-            padding: 40px 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 40px;
-        }
-
-        .logo {
-            font-size: 1.125rem;
-            font-weight: 700;
-            color: var(--text-title);
-            letter-spacing: -0.01em;
-        }
-
-        nav {
-            display: flex;
-            gap: 24px;
-        }
-
-        nav a {
-            font-size: 0.95rem;
-            font-weight: 500;
-            color: var(--text-muted);
-        }
-
-        nav a:hover {
-            color: var(--text-title);
-        }
-
-        /* Section Global */
-        section {
-            margin-bottom: 120px;
-        }
-
-        .section-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-title);
-            margin-bottom: 32px;
-            letter-spacing: -0.02em;
-        }
-
-        /* Hero */
-        .hero {
-            padding: 60px 0 80px 0;
-        }
-
-        .hero h1 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--text-title);
-            line-height: 1.3;
-            letter-spacing: -0.03em;
-            margin-bottom: 24px;
-        }
-
-        .hero p {
-            font-size: 1.125rem;
-            color: var(--text-body);
-            line-height: 1.7;
-            margin-bottom: 40px;
-            max-width: 650px;
-        }
-
-        .contact-links {
-            display: flex;
-            gap: 16px;
-        }
-
-        .contact-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 12px 24px;
-            background-color: var(--bg-sub);
-            color: var(--text-title);
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: all 0.2s ease;
-        }
-
-        .contact-btn:hover {
-            background-color: var(--border-light);
-        }
-
-        .contact-btn.primary {
-            background-color: var(--text-title);
-            color: #fff;
-        }
-
-        .contact-btn.primary:hover {
-            background-color: #000;
-        }
-
-        /* Stacks (Like kimjy-portfolio) */
-        .stack-group {
-            margin-bottom: 32px;
-        }
-
-        .stack-group:last-child {
-            margin-bottom: 0;
-        }
-
-        .stack-category {
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--text-muted);
-            margin-bottom: 16px;
-        }
-
-        .stack-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-
-        .stack-item {
-            padding: 8px 16px;
-            background-color: var(--bg-main);
-            border: 1px solid var(--border-light);
-            border-radius: 20px;
-            font-size: 0.95rem;
-            font-weight: 500;
-            color: var(--text-title);
-            transition: border-color 0.2s ease;
-        }
-        
-        .stack-item:hover {
-            border-color: var(--text-muted);
-        }
-
-        /* Projects (Like leeboa.com) */
-        .project-list {
-            display: flex;
-            flex-direction: column;
-            gap: 40px;
-        }
-
-        .project-card {
-            display: flex;
-            gap: 32px;
-            padding: 32px;
-            background-color: var(--bg-main);
-            border: 1px solid var(--border-light);
-            border-radius: 16px;
-            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-        }
-
-        @media (max-width: 768px) {
-            .project-card {
-                flex-direction: column;
-                gap: 24px;
-            }
-        }
-
-        .project-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 24px rgba(0,0,0,0.04);
-            border-color: var(--border-hover);
-        }
-
-        .project-thumb {
-            flex-shrink: 0;
-            width: 240px;
-            height: 160px;
-            background-color: var(--bg-sub);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            font-weight: 500;
-            border: 1px solid var(--border-light);
-        }
-
-        @media (max-width: 768px) {
-            .project-thumb {
-                width: 100%;
-                height: 200px;
-            }
-        }
-
-        .project-content {
-            flex-grow: 1;
-        }
-
-        .project-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 16px;
-        }
-
-        .project-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--text-title);
-        }
-
-        .project-period {
-            font-size: 0.875rem;
-            color: var(--text-muted);
-            font-weight: 500;
-        }
-
-        .project-desc {
-            font-size: 1rem;
-            color: var(--text-body);
-            margin-bottom: 16px;
-            line-height: 1.6;
-        }
-
-        .project-details {
-            margin-bottom: 24px;
-            font-size: 0.95rem;
-            line-height: 1.6;
-            color: var(--text-body);
-            background-color: var(--bg-sub);
-            padding: 16px;
-            border-radius: 8px;
-        }
-
-        .project-details li {
-            display: flex;
-            margin-bottom: 8px;
-            list-style: none;
-        }
-        
-        .project-details li:last-child {
-            margin-bottom: 0;
-        }
-
-        .project-details li strong {
-            min-width: 70px;
-            color: var(--text-title);
-            font-weight: 600;
-        }
-
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .project-tag {
-            padding: 4px 10px;
-            background-color: var(--accent-bg);
-            color: var(--accent);
-            border-radius: 6px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        /* Background/Education */
-        .edu-item {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            padding-bottom: 24px;
-            border-bottom: 1px solid var(--border-light);
-            margin-bottom: 24px;
-        }
-
-        .edu-item:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-
-        .edu-title {
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: var(--text-title);
-        }
-
-        .edu-detail {
-            font-size: 1rem;
-            color: var(--text-muted);
-        }
-
-        /* Footer */
-        footer {
-            padding: 40px 0 60px 0;
-            border-top: 1px solid var(--border-light);
-            text-align: center;
-            font-size: 0.875rem;
-            color: var(--text-muted);
-        }
-
-        /* Reveal Animation */
-        .reveal {
-            opacity: 0;
-            transform: translateY(15px);
-            animation: fadeUp 0.8s forwards cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
-
-        @keyframes fadeUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .delay-1 { animation-delay: 0.1s; }
-        .delay-2 { animation-delay: 0.2s; }
-        .delay-3 { animation-delay: 0.3s; }
-
-    </style>
+    <!-- GSAP for Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 </head>
 <body>
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
 
-    <div class="container">
-        <header>
-            <div class="logo">김건희</div>
+    <!-- Header / Nav -->
+    <header>
+        <div class="nav-inner">
+            <div class="logo">KIM.</div>
             <nav>
                 <a href="#about">About</a>
                 <a href="#stacks">Stacks</a>
                 <a href="#projects">Projects</a>
+                <a href="#activities">Activities</a>
             </nav>
-        </header>
+        </div>
+    </header>
 
-        <main>
-            <!-- Hero / About -->
-            <section id="about" class="hero" style="display: flex; gap: 48px; align-items: center; justify-content: space-between; flex-wrap: wrap-reverse;">
-                <div style="flex: 1; min-width: 300px;">
-                    <div class="reveal" style="font-size: 0.95rem; font-weight: 700; color: var(--accent); margin-bottom: 16px; letter-spacing: 0.05em;">NETWORK & AI SYSTEM ENGINEER</div>
-                    <h1 class="reveal delay-1">안정적인 인프라와 지능형 시스템의<br>융합을 설계하는 김건희입니다.</h1>
-                    <p class="reveal delay-2">
-                        단순히 기능이 동작하는 코드를 넘어, 데이터가 이동하는 네트워크 계층부터 최상단의 인공지능 모델(LLM)까지 전체적인 아키텍처와 보안을 중요하게 생각합니다. 사용자에게 신뢰를 줄 수 있는 견고한 서비스를 만드는 것을 목표로 합니다.
+    <div class="container">
+        <!-- Hero Section -->
+        <section id="about" class="hero">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <span class="hero-tag">NETWORK & AI SYSTEM ENGINEER</span>
+                    <h1 class="hero-title">안정적인 인프라와<br>지능형 시스템의 융합</h1>
+                    <p class="hero-desc">
+                        데이터가 이동하는 네트워크 계층부터 최상단의 인공지능 모델(LLM)까지, 전체적인 아키텍처와 보안을 중요하게 생각합니다. 예측 불가능한 환경에서도 무너지지 않는 견고한 서비스를 설계하는 엔지니어 김건희입니다.
                     </p>
-                    <div class="contact-links reveal delay-2">
-                        <a href="mailto:kimsharrrk@naver.com" class="contact-btn primary">이메일 보내기</a>
-                        <a href="https://github.com/Kimsharrrk" target="_blank" class="contact-btn">GitHub 방문</a>
+                    <div class="btn-group">
+                        <a href="mailto:kimsharrrk@naver.com" class="btn btn-primary">합류 제안하기</a>
+                        <a href="https://github.com/Kimsharrrk" target="_blank" class="btn btn-outline">GitHub 방문 ↗</a>
                     </div>
                 </div>
-                <div class="reveal" style="width: 240px; height: 240px; border-radius: 50%; background-color: var(--bg-sub); border: 1px solid var(--border-light); display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-weight: 500; font-size: 0.9rem; flex-shrink: 0; overflow: hidden;">
+                <div class="hero-image">
+                    <!-- Profile Image Placeholder -->
                     Profile Image
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- Stacks (kimjy-portfolio reference) -->
-            <section id="stacks" class="reveal delay-3">
-                <h2 class="section-title">Tech Stacks</h2>
+        <!-- Tech Stacks -->
+        <section id="stacks">
+            <h2 class="section-title">Tech Stacks</h2>
+            <div class="stack-grid">
                 
-                <div class="stack-group">
-                    <div class="stack-category">Network & Security</div>
-                    <div class="stack-list">
-                        <div class="stack-item" style="display:flex; align-items:center; gap:8px;"><i class="devicon-linux-plain colored"></i> Linux</div>
-                        <div class="stack-item" style="display:flex; align-items:center; gap:8px;"><i class="devicon-bash-plain colored"></i> Bash</div>
-                        <div class="stack-item" style="display:flex; align-items:center; gap:8px;"><i class="devicon-amazonwebservices-plain-wordmark colored"></i> AWS</div>
-                        <div class="stack-item" style="display:flex; align-items:center; gap:8px;">TCP/IP & Socket</div>
-                        <div class="stack-item" style="display:flex; align-items:center; gap:8px;">Wireshark</div>
+                <div class="stack-card">
+                    <h3>Network & Security</h3>
+                    <div class="stack-items">
+                        <span class="stack-item"><i class="devicon-linux-plain colored"></i> Linux</span>
+                        <span class="stack-item"><i class="devicon-bash-plain colored"></i> Bash</span>
+                        <span class="stack-item"><i class="devicon-amazonwebservices-plain-wordmark colored"></i> AWS</span>
+                        <span class="stack-item">TCP/IP</span>
+                        <span class="stack-item">Socket</span>
+                        <span class="stack-item">Wireshark</span>
                     </div>
                 </div>
 
-                <div class="stack-group">
-                    <div class="stack-category">AI & Backend</div>
-                    <div class="stack-list">
-                        <div class="stack-item" style="display:flex; align-items:center; gap:8px;"><i class="devicon-python-plain colored"></i> Python</div>
-                        <div class="stack-item" style="display:flex; align-items:center; gap:8px;"><i class="devicon-cplusplus-plain colored"></i> C++</div>
-                        <div class="stack-item" style="display:flex; align-items:center; gap:8px;"><i class="devicon-typescript-plain colored"></i> TypeScript</div>
-                        <div class="stack-item" style="display:flex; align-items:center; gap:8px;"><i class="devicon-swift-plain colored"></i> Swift</div>
-                        <div class="stack-item" style="display:flex; align-items:center; gap:8px;">OpenAI API</div>
+                <div class="stack-card">
+                    <h3>AI & Backend</h3>
+                    <div class="stack-items">
+                        <span class="stack-item"><i class="devicon-python-plain colored"></i> Python</span>
+                        <span class="stack-item"><i class="devicon-cplusplus-plain colored"></i> C++</span>
+                        <span class="stack-item"><i class="devicon-typescript-plain colored"></i> TypeScript</span>
+                        <span class="stack-item"><i class="devicon-swift-plain colored"></i> Swift</span>
+                        <span class="stack-item">OpenAI API</span>
+                        <span class="stack-item">LLM</span>
                     </div>
                 </div>
-            </section>
 
-            <!-- Projects (leeboa.com reference) -->
-            <section id="projects">
-                <h2 class="section-title">Projects</h2>
+            </div>
+        </section>
+
+        <!-- Projects -->
+        <section id="projects">
+            <h2 class="section-title">Selected Projects</h2>
+            <div class="project-list">
                 
-                <div class="project-list">
-                    <!-- Project 1 -->
-                    <div class="project-card reveal">
-                        <div class="project-thumb">Thumbnail</div>
-                        <div class="project-content">
-                        <div class="project-header">
-                            <h3 class="project-title">LLM 기반 네트워크 이상 탐지 봇</h3>
-                            <span class="project-period">2026.03 - 2026.06 (Personal Project)</span>
-                        </div>
-                        <p class="project-desc">
-                            대량의 서버 로그와 패킷을 실시간으로 분석하여, 비정상적인 트래픽이나 침입 시도를 식별하는 보안 파이프라인 프로토타입입니다.
-                        </p>
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <div class="project-thumb">
+                        <div class="project-thumb-placeholder">Thumbnail</div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-meta">2026.03 - 2026.06 · Personal</span>
+                        <h3 class="project-title">LLM 기반 네트워크 이상 탐지 봇</h3>
+                        <p class="project-desc">대량의 서버 로그와 패킷을 실시간으로 분석하여, 비정상적인 트래픽이나 침입 시도를 식별하는 보안 파이프라인 프로토타입입니다.</p>
                         <ul class="project-details">
                             <li><strong>Mission</strong> <span>기존 룰 기반 탐지의 한계를 넘기 위해 자연어 맥락 추론이 가능한 LLM 도입</span></li>
                             <li><strong>Role</strong> <span>1인 기획 및 풀스택 개발 (기여도 100%)</span></li>
                             <li><strong>Result</strong> <span>Wireshark 패킷 데이터를 파싱하여 비정상 패턴 탐지 시나리오 성공적 시연</span></li>
-                            <li><strong>Insight</strong> <span>네트워크 로그와 같이 정형화되지 않은 방대한 데이터를 프롬프트 엔지니어링을 통해 유의미한 정보로 정제하는 노하우를 터득함.</span></li>
+                            <li><strong>Insight</strong> <span>정형화되지 않은 방대한 데이터를 프롬프트 엔지니어링을 통해 정제하는 노하우 터득</span></li>
                         </ul>
                         <div class="project-tags">
                             <span class="project-tag">Python</span>
                             <span class="project-tag">OpenAI API</span>
                             <span class="project-tag">Network Security</span>
                         </div>
-                        </div>
                     </div>
+                </div>
 
-                    <!-- Project 2 -->
-                    <div class="project-card reveal">
-                        <div class="project-thumb">Thumbnail</div>
-                        <div class="project-content">
-                        <div class="project-header">
-                            <h3 class="project-title">Secure P2P Chat Protocol</h3>
-                            <span class="project-period">2026.09 - 진행 중 (Academic Project)</span>
-                        </div>
-                        <p class="project-desc">
-                            중앙 서버를 거치지 않고 클라이언트 간 직접 연결을 통해 통신하는 초경량 P2P 채팅 애플리케이션입니다.
-                        </p>
+                <!-- Project 2 -->
+                <div class="project-card">
+                    <div class="project-thumb">
+                        <div class="project-thumb-placeholder">Thumbnail</div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-meta">2026.09 - 진행 중 · Academic</span>
+                        <h3 class="project-title">Secure P2P Chat Protocol</h3>
+                        <p class="project-desc">중앙 서버를 거치지 않고 클라이언트 간 직접 연결을 통해 통신하는 초경량 P2P 채팅 애플리케이션입니다.</p>
                         <ul class="project-details">
                             <li><strong>Mission</strong> <span>메시지 유출을 원천 차단하는 가장 안전하고 가벼운 통신 프로토콜 설계</span></li>
                             <li><strong>Role</strong> <span>Core Protocol 설계 및 종단간 암호화(E2EE) 모듈 개발 (기여도 70%)</span></li>
                             <li><strong>Result</strong> <span>AES-256을 적용한 안전한 소켓 통신 구현 성공</span></li>
-                            <li><strong>Insight</strong> <span>보안과 성능(지연 시간) 사이의 트레이드오프를 경험하며, 시스템 아키텍처 수준에서의 암호화 키 교환 로직을 깊이 이해함.</span></li>
+                            <li><strong>Insight</strong> <span>보안과 성능(지연 시간) 사이의 트레이드오프를 경험하며 시스템 아키텍처 암호화 이해</span></li>
                         </ul>
                         <div class="project-tags">
                             <span class="project-tag">C++</span>
                             <span class="project-tag">Socket Programming</span>
                             <span class="project-tag">AES-256</span>
                         </div>
-                        </div>
                     </div>
+                </div>
 
-                    <!-- Project 3 -->
-                    <div class="project-card reveal">
-                        <div class="project-thumb">Thumbnail</div>
-                        <div class="project-content">
-                        <div class="project-header">
-                            <h3 class="project-title"><a href="https://github.com/Kimsharrrk/monster-typing-pretext" target="_blank" style="color: inherit; text-decoration: none;">Monster Typing Pretext ↗</a></h3>
-                            <span class="project-period">Personal Project</span>
-                        </div>
-                        <p class="project-desc">
-                            TypeScript를 기반으로 구축한 타자 연습 게임 웹 애플리케이션입니다. 텍스트 입력과 화면 업데이트 사이의 지연을 최소화하여 쾌적한 인터랙션을 구현했습니다.
-                        </p>
+                <!-- Project 3 -->
+                <div class="project-card">
+                    <div class="project-thumb">
+                        <div class="project-thumb-placeholder">Thumbnail</div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-meta">Personal Project</span>
+                        <h3 class="project-title"><a href="https://github.com/Kimsharrrk/monster-typing-pretext" target="_blank">Monster Typing Pretext ↗</a></h3>
+                        <p class="project-desc">TypeScript를 기반으로 구축한 타자 연습 게임 웹 애플리케이션입니다. 텍스트 입력과 화면 업데이트 사이의 지연을 최소화하여 쾌적한 인터랙션을 구현했습니다.</p>
                         <div class="project-tags">
                             <span class="project-tag">TypeScript</span>
                             <span class="project-tag">Web Frontend</span>
                         </div>
-                        </div>
                     </div>
+                </div>
 
-                    <!-- Project 4 -->
-                    <div class="project-card reveal">
-                        <div class="project-thumb">Thumbnail</div>
-                        <div class="project-content">
-                        <div class="project-header">
-                            <h3 class="project-title"><a href="https://github.com/Kimsharrrk/SidecarSnap" target="_blank" style="color: inherit; text-decoration: none;">SidecarSnap ↗</a></h3>
-                            <span class="project-period">Personal Project</span>
-                        </div>
-                        <p class="project-desc">
-                            Swift로 개발한 네이티브 애플리케이션입니다. Apple 생태계의 기능을 활용하여 사용자 편의성을 높이는 유틸리티성 동작을 시스템 레벨에서 안정적으로 연동했습니다.
-                        </p>
+                <!-- Project 4 -->
+                <div class="project-card">
+                    <div class="project-thumb">
+                        <div class="project-thumb-placeholder">Thumbnail</div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-meta">Personal Project</span>
+                        <h3 class="project-title"><a href="https://github.com/Kimsharrrk/SidecarSnap" target="_blank">SidecarSnap ↗</a></h3>
+                        <p class="project-desc">Swift로 개발한 네이티브 애플리케이션입니다. Apple 생태계의 기능을 활용하여 사용자 편의성을 높이는 유틸리티성 동작을 시스템 레벨에서 안정적으로 연동했습니다.</p>
                         <div class="project-tags">
                             <span class="project-tag">Swift</span>
                             <span class="project-tag">Apple Native</span>
                         </div>
-                        </div>
                     </div>
+                </div>
 
-                    <!-- Project 5 -->
-                    <div class="project-card reveal">
-                        <div class="project-thumb">Thumbnail</div>
-                        <div class="project-content">
-                        <div class="project-header">
-                            <h3 class="project-title"><a href="https://github.com/Kimsharrrk/globe-pretext" target="_blank" style="color: inherit; text-decoration: none;">Globe Pretext ↗</a></h3>
-                            <span class="project-period">Personal Project</span>
-                        </div>
-                        <p class="project-desc">
-                            3D 지구본(Globe) 모델을 렌더링하는 시각화 프로젝트입니다. TypeScript를 활용하여 좌표 데이터를 인터랙티브하게 브라우저에 매핑하는 그래픽 렌더링 환경을 구축했습니다.
-                        </p>
+                <!-- Project 5 -->
+                <div class="project-card">
+                    <div class="project-thumb">
+                        <div class="project-thumb-placeholder">Thumbnail</div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-meta">Personal Project</span>
+                        <h3 class="project-title"><a href="https://github.com/Kimsharrrk/globe-pretext" target="_blank">Globe Pretext ↗</a></h3>
+                        <p class="project-desc">3D 지구본(Globe) 모델을 렌더링하는 시각화 프로젝트입니다. TypeScript를 활용하여 좌표 데이터를 인터랙티브하게 브라우저에 매핑하는 그래픽 렌더링 환경을 구축했습니다.</p>
                         <div class="project-tags">
                             <span class="project-tag">TypeScript</span>
                             <span class="project-tag">Data Visualization</span>
                         </div>
-                        </div>
                     </div>
+                </div>
 
-                    <!-- Project 6 -->
-                    <div class="project-card reveal">
-                        <div class="project-thumb">Thumbnail</div>
-                        <div class="project-content">
-                        <div class="project-header">
-                            <h3 class="project-title"><a href="https://github.com/Kimsharrrk/interactive-portfolio" target="_blank" style="color: inherit; text-decoration: none;">Interactive Portfolio ↗</a></h3>
-                            <span class="project-period">Personal Project</span>
-                        </div>
-                        <p class="project-desc">
-                            사용자와 상호작용하는 웹 기반 개인 포트폴리오입니다. 정적인 페이지를 넘어, 스크롤 애니메이션과 세련된 UI 레이아웃을 접목하여 시각적인 즐거움과 정보 전달력을 동시에 높였습니다.
-                        </p>
+                <!-- Project 6 -->
+                <div class="project-card">
+                    <div class="project-thumb">
+                        <div class="project-thumb-placeholder">Thumbnail</div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-meta">Personal Project</span>
+                        <h3 class="project-title"><a href="https://github.com/Kimsharrrk/interactive-portfolio" target="_blank">Interactive Portfolio ↗</a></h3>
+                        <p class="project-desc">사용자와 상호작용하는 웹 기반 개인 포트폴리오입니다. 정적인 페이지를 넘어, 스크롤 애니메이션과 세련된 UI 레이아웃을 접목하여 시각적인 즐거움과 정보 전달력을 동시에 높였습니다.</p>
                         <div class="project-tags">
                             <span class="project-tag">HTML/CSS</span>
                             <span class="project-tag">JavaScript</span>
                             <span class="project-tag">UI/UX Design</span>
                         </div>
-                        </div>
                     </div>
                 </div>
-            </section>
 
-            <!-- Activities -->
-            <section id="activities">
-                <h2 class="section-title">Activities & Awards</h2>
+            </div>
+        </section>
+
+        <!-- Activities -->
+        <section id="activities">
+            <h2 class="section-title">Activities & Awards</h2>
+            <div class="project-list">
                 
-                <div class="project-list">
-                    <!-- Activity 1 -->
-                    <div class="project-card reveal">
-                        <div class="project-thumb">Thumbnail</div>
-                        <div class="project-content">
-                        <div class="project-header">
-                            <h3 class="project-title">LG Aimers 9기 (AI 연구·R&D)</h3>
-                            <span class="project-period">2026.06 - 2026.09</span>
-                        </div>
-                        <p class="project-desc">
-                            LG경영개발원 AI연구원에서 주관하는 청년 일경험 지원사업에 참여하여 AI Workflow 및 실무 R&D 역량을 강화했습니다.
-                        </p>
+                <div class="project-card">
+                    <div class="project-thumb">
+                        <div class="project-thumb-placeholder">Thumbnail</div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-meta">2026.06 - 2026.09</span>
+                        <h3 class="project-title">LG Aimers 9기 (AI 연구·R&D)</h3>
+                        <p class="project-desc">LG경영개발원 AI연구원에서 주관하는 청년 일경험 지원사업에 참여하여 AI Workflow 및 실무 R&D 역량을 강화했습니다.</p>
                         <div class="project-tags">
                             <span class="project-tag">LG AI Research</span>
                             <span class="project-tag">AI R&D</span>
                         </div>
-                        </div>
                     </div>
+                </div>
 
-                    <!-- Activity 2 -->
-                    <div class="project-card reveal">
-                        <div class="project-thumb">Thumbnail</div>
-                        <div class="project-content">
-                        <div class="project-header">
-                            <h3 class="project-title">2026 CNU X Upstage AI Workflow Workshop</h3>
-                            <span class="project-period">2026</span>
-                        </div>
-                        <p class="project-desc">
-                            충남대학교와 업스테이지(Upstage)가 공동 주관한 AI 워크플로우 해커톤/워크샵에 참여하여 실무적인 인공지능 모델 적용 및 개발 사이클을 경험했습니다.
-                        </p>
+                <div class="project-card">
+                    <div class="project-thumb">
+                        <div class="project-thumb-placeholder">Thumbnail</div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-meta">2026</span>
+                        <h3 class="project-title">2026 CNU X Upstage AI Workflow Workshop</h3>
+                        <p class="project-desc">충남대학교와 업스테이지(Upstage)가 공동 주관한 AI 워크플로우 해커톤/워크샵에 참여하여 실무적인 인공지능 모델 적용 및 개발 사이클을 경험했습니다.</p>
                         <div class="project-tags">
                             <span class="project-tag">Upstage</span>
                             <span class="project-tag">AI Workflow</span>
                         </div>
-                        </div>
                     </div>
+                </div>
 
-                    <!-- Activity 3 -->
-                    <div class="project-card reveal">
-                        <div class="project-thumb">Thumbnail</div>
-                        <div class="project-content">
-                        <div class="project-header">
-                            <h3 class="project-title">2026 AI·SW 중심대학 디지털 경진대회 (AI부문)</h3>
-                            <span class="project-period">2026</span>
-                        </div>
-                        <p class="project-desc">
-                            AI 부문에 출전하여 인공지능 기술을 활용한 서비스 기획 및 구현 능력을 검증받으며 실전 프로젝트 경험을 쌓았습니다.
-                        </p>
+                <div class="project-card">
+                    <div class="project-thumb">
+                        <div class="project-thumb-placeholder">Thumbnail</div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-meta">2026</span>
+                        <h3 class="project-title">2026 AI·SW 중심대학 디지털 경진대회 (AI부문)</h3>
+                        <p class="project-desc">AI 부문에 출전하여 인공지능 기술을 활용한 서비스 기획 및 구현 능력을 검증받으며 실전 프로젝트 경험을 쌓았습니다.</p>
                         <div class="project-tags">
                             <span class="project-tag">AI Competition</span>
                             <span class="project-tag">Hackathon</span>
                         </div>
-                        </div>
                     </div>
+                </div>
 
-                    <!-- Activity 4 -->
-                    <div class="project-card reveal">
-                        <div class="project-thumb">Thumbnail</div>
-                        <div class="project-content">
-                        <div class="project-header">
-                            <h3 class="project-title">NYPC (Nexon Youth Programming Challenge)</h3>
-                            <span class="project-period">Past</span>
-                        </div>
-                        <p class="project-desc">
-                            넥슨에서 주최하는 청소년 프로그래밍 대회에 참가하여 알고리즘 설계 및 논리적 문제 해결 능력을 다졌습니다.
-                        </p>
+                <div class="project-card">
+                    <div class="project-thumb">
+                        <div class="project-thumb-placeholder">Thumbnail</div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-meta">Past</span>
+                        <h3 class="project-title">NYPC (Nexon Youth Programming Challenge)</h3>
+                        <p class="project-desc">넥슨에서 주최하는 청소년 프로그래밍 대회에 참가하여 알고리즘 설계 및 논리적 문제 해결 능력을 다졌습니다.</p>
                         <div class="project-tags">
                             <span class="project-tag">Algorithm</span>
                             <span class="project-tag">Problem Solving</span>
                         </div>
-                        </div>
                     </div>
                 </div>
-            </section>
 
-            <!-- Education -->
-            <section class="reveal">
-                <h2 class="section-title">Background</h2>
-                
+            </div>
+        </section>
+
+        <!-- Background -->
+        <section id="background">
+            <h2 class="section-title">Background</h2>
+            <div class="edu-list">
                 <div class="edu-item">
                     <span class="edu-title">공주대학교 소프트웨어학과</span>
-                    <span class="edu-detail">학사 과정 진행 중</span>
+                    <span class="edu-desc">학사 과정 진행 중</span>
                 </div>
                 <div class="edu-item">
                     <span class="edu-title">미래첨단기술과 이해I</span>
-                    <span class="edu-detail">수강 과정</span>
+                    <span class="edu-desc">수강 과정</span>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- Ending Message -->
-            <section class="reveal" style="text-align: center; margin-top: 80px; margin-bottom: 60px;">
-                <h2 style="font-size: 1.75rem; font-weight: 800; color: var(--text-title); margin-bottom: 16px; letter-spacing: -0.03em;">
-                    안정적인 인프라와 지능형 시스템,<br>그 최전선에서 기여하겠습니다.
-                </h2>
-                <p style="font-size: 1.1rem; color: var(--text-body); max-width: 600px; margin: 0 auto 32px auto; line-height: 1.6;">
-                    보안이 담보된 견고한 네트워크 아키텍처 위에 LLM을 비롯한 최신 기술을 접목하여, 예측 불가능한 변수 앞에서도 멈추지 않는 서비스를 설계하는 엔지니어가 되겠습니다.
-                </p>
-                <a href="mailto:kimsharrrk@naver.com" class="contact-btn primary" style="font-size: 1.1rem; padding: 16px 32px; border-radius: 12px;">합류 제안하기 (Contact)</a>
-            </section>
-        </main>
-
-        <footer class="reveal">
-            <p>© 2026 김건희 (KIM GEON HUI). All rights reserved.</p>
-        </footer>
+        <!-- Ending -->
+        <section class="ending">
+            <h2>Next Level System, <br>With You.</h2>
+            <p style="font-size: 1.1rem; max-width: 600px; margin: 0 auto 40px auto;">
+                보안이 담보된 견고한 네트워크 아키텍처 위에 최신 기술을 접목하여, 어떤 상황에서도 멈추지 않는 서비스를 함께 만들어가겠습니다.
+            </p>
+            <a href="mailto:kimsharrrk@naver.com" class="btn btn-primary" style="padding: 20px 40px; font-size: 1.1rem;">합류 제안하기</a>
+        </section>
     </div>
 
-    <!-- Intersection Observer for Scroll Animation -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.animationPlayState = 'running';
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, {
-                threshold: 0.1
-            });
+    <footer>
+        <p>© 2026 KIM GEON HUI. All rights reserved.</p>
+    </footer>
 
-            document.querySelectorAll('.reveal').forEach(el => {
-                el.style.animationPlayState = 'paused';
-                observer.observe(el);
-            });
-        });
-    </script>
+    <!-- Custom JS -->
+    <script src="js/main.js"></script>
 </body>
 </html>
