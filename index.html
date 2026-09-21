@@ -7,6 +7,9 @@
     
     <!-- Pretendard Font (Standard for Clean Korean UI) -->
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable.css" />
+    
+    <!-- Devicon for Tech Stack Icons -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
 
     <style>
         :root {
@@ -201,10 +204,12 @@
         .project-list {
             display: flex;
             flex-direction: column;
-            gap: 32px;
+            gap: 40px;
         }
 
         .project-card {
+            display: flex;
+            gap: 32px;
             padding: 32px;
             background-color: var(--bg-main);
             border: 1px solid var(--border-light);
@@ -212,10 +217,43 @@
             transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
         }
 
+        @media (max-width: 768px) {
+            .project-card {
+                flex-direction: column;
+                gap: 24px;
+            }
+        }
+
         .project-card:hover {
             transform: translateY(-2px);
             box-shadow: 0 12px 24px rgba(0,0,0,0.04);
             border-color: var(--border-hover);
+        }
+
+        .project-thumb {
+            flex-shrink: 0;
+            width: 240px;
+            height: 160px;
+            background-color: var(--bg-sub);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid var(--border-light);
+        }
+
+        @media (max-width: 768px) {
+            .project-thumb {
+                width: 100%;
+                height: 200px;
+            }
+        }
+
+        .project-content {
+            flex-grow: 1;
         }
 
         .project-header {
@@ -355,15 +393,20 @@
 
         <main>
             <!-- Hero / About -->
-            <section id="about" class="hero">
-                <div class="reveal" style="font-size: 0.95rem; font-weight: 700; color: var(--accent); margin-bottom: 16px; letter-spacing: 0.05em;">NETWORK & AI SYSTEM ENGINEER</div>
-                <h1 class="reveal delay-1">안정적인 인프라와 지능형 시스템의<br>융합을 설계하는 김건희입니다.</h1>
-                <p class="reveal delay-2">
-                    단순히 기능이 동작하는 코드를 넘어, 데이터가 이동하는 네트워크 계층부터 최상단의 인공지능 모델(LLM)까지 전체적인 아키텍처와 보안을 중요하게 생각합니다. 사용자에게 신뢰를 줄 수 있는 견고한 서비스를 만드는 것을 목표로 합니다.
-                </p>
-                <div class="contact-links reveal delay-2">
-                    <a href="mailto:kimsharrrk@naver.com" class="contact-btn primary">이메일 보내기</a>
-                    <a href="https://github.com/Kimsharrrk" target="_blank" class="contact-btn">GitHub 방문</a>
+            <section id="about" class="hero" style="display: flex; gap: 48px; align-items: center; justify-content: space-between; flex-wrap: wrap-reverse;">
+                <div style="flex: 1; min-width: 300px;">
+                    <div class="reveal" style="font-size: 0.95rem; font-weight: 700; color: var(--accent); margin-bottom: 16px; letter-spacing: 0.05em;">NETWORK & AI SYSTEM ENGINEER</div>
+                    <h1 class="reveal delay-1">안정적인 인프라와 지능형 시스템의<br>융합을 설계하는 김건희입니다.</h1>
+                    <p class="reveal delay-2">
+                        단순히 기능이 동작하는 코드를 넘어, 데이터가 이동하는 네트워크 계층부터 최상단의 인공지능 모델(LLM)까지 전체적인 아키텍처와 보안을 중요하게 생각합니다. 사용자에게 신뢰를 줄 수 있는 견고한 서비스를 만드는 것을 목표로 합니다.
+                    </p>
+                    <div class="contact-links reveal delay-2">
+                        <a href="mailto:kimsharrrk@naver.com" class="contact-btn primary">이메일 보내기</a>
+                        <a href="https://github.com/Kimsharrrk" target="_blank" class="contact-btn">GitHub 방문</a>
+                    </div>
+                </div>
+                <div class="reveal" style="width: 240px; height: 240px; border-radius: 50%; background-color: var(--bg-sub); border: 1px solid var(--border-light); display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-weight: 500; font-size: 0.9rem; flex-shrink: 0; overflow: hidden;">
+                    Profile Image
                 </div>
             </section>
 
@@ -374,20 +417,22 @@
                 <div class="stack-group">
                     <div class="stack-category">Network & Security</div>
                     <div class="stack-list">
-                        <div class="stack-item">TCP/IP Protocol</div>
-                        <div class="stack-item">Socket Programming</div>
-                        <div class="stack-item">Cryptography</div>
-                        <div class="stack-item">Wireshark</div>
+                        <div class="stack-item" style="display:flex; align-items:center; gap:8px;"><i class="devicon-linux-plain colored"></i> Linux</div>
+                        <div class="stack-item" style="display:flex; align-items:center; gap:8px;"><i class="devicon-bash-plain colored"></i> Bash</div>
+                        <div class="stack-item" style="display:flex; align-items:center; gap:8px;"><i class="devicon-amazonwebservices-plain-wordmark colored"></i> AWS</div>
+                        <div class="stack-item" style="display:flex; align-items:center; gap:8px;">TCP/IP & Socket</div>
+                        <div class="stack-item" style="display:flex; align-items:center; gap:8px;">Wireshark</div>
                     </div>
                 </div>
 
                 <div class="stack-group">
                     <div class="stack-category">AI & Backend</div>
                     <div class="stack-list">
-                        <div class="stack-item">Python</div>
-                        <div class="stack-item">C++</div>
-                        <div class="stack-item">LLM Integration (OpenAI)</div>
-                        <div class="stack-item">Prompt Engineering</div>
+                        <div class="stack-item" style="display:flex; align-items:center; gap:8px;"><i class="devicon-python-plain colored"></i> Python</div>
+                        <div class="stack-item" style="display:flex; align-items:center; gap:8px;"><i class="devicon-cplusplus-plain colored"></i> C++</div>
+                        <div class="stack-item" style="display:flex; align-items:center; gap:8px;"><i class="devicon-typescript-plain colored"></i> TypeScript</div>
+                        <div class="stack-item" style="display:flex; align-items:center; gap:8px;"><i class="devicon-swift-plain colored"></i> Swift</div>
+                        <div class="stack-item" style="display:flex; align-items:center; gap:8px;">OpenAI API</div>
                     </div>
                 </div>
             </section>
@@ -399,6 +444,8 @@
                 <div class="project-list">
                     <!-- Project 1 -->
                     <div class="project-card reveal">
+                        <div class="project-thumb">Thumbnail</div>
+                        <div class="project-content">
                         <div class="project-header">
                             <h3 class="project-title">LLM 기반 네트워크 이상 탐지 봇</h3>
                             <span class="project-period">2026.03 - 2026.06 (Personal Project)</span>
@@ -417,10 +464,13 @@
                             <span class="project-tag">OpenAI API</span>
                             <span class="project-tag">Network Security</span>
                         </div>
+                        </div>
                     </div>
 
                     <!-- Project 2 -->
                     <div class="project-card reveal">
+                        <div class="project-thumb">Thumbnail</div>
+                        <div class="project-content">
                         <div class="project-header">
                             <h3 class="project-title">Secure P2P Chat Protocol</h3>
                             <span class="project-period">2026.09 - 진행 중 (Academic Project)</span>
@@ -439,10 +489,13 @@
                             <span class="project-tag">Socket Programming</span>
                             <span class="project-tag">AES-256</span>
                         </div>
+                        </div>
                     </div>
 
                     <!-- Project 3 -->
                     <div class="project-card reveal">
+                        <div class="project-thumb">Thumbnail</div>
+                        <div class="project-content">
                         <div class="project-header">
                             <h3 class="project-title"><a href="https://github.com/Kimsharrrk/monster-typing-pretext" target="_blank" style="color: inherit; text-decoration: none;">Monster Typing Pretext ↗</a></h3>
                             <span class="project-period">Personal Project</span>
@@ -454,10 +507,13 @@
                             <span class="project-tag">TypeScript</span>
                             <span class="project-tag">Web Frontend</span>
                         </div>
+                        </div>
                     </div>
 
                     <!-- Project 4 -->
                     <div class="project-card reveal">
+                        <div class="project-thumb">Thumbnail</div>
+                        <div class="project-content">
                         <div class="project-header">
                             <h3 class="project-title"><a href="https://github.com/Kimsharrrk/SidecarSnap" target="_blank" style="color: inherit; text-decoration: none;">SidecarSnap ↗</a></h3>
                             <span class="project-period">Personal Project</span>
@@ -469,10 +525,13 @@
                             <span class="project-tag">Swift</span>
                             <span class="project-tag">Apple Native</span>
                         </div>
+                        </div>
                     </div>
 
                     <!-- Project 5 -->
                     <div class="project-card reveal">
+                        <div class="project-thumb">Thumbnail</div>
+                        <div class="project-content">
                         <div class="project-header">
                             <h3 class="project-title"><a href="https://github.com/Kimsharrrk/globe-pretext" target="_blank" style="color: inherit; text-decoration: none;">Globe Pretext ↗</a></h3>
                             <span class="project-period">Personal Project</span>
@@ -483,6 +542,7 @@
                         <div class="project-tags">
                             <span class="project-tag">TypeScript</span>
                             <span class="project-tag">Data Visualization</span>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -495,6 +555,8 @@
                 <div class="project-list">
                     <!-- Activity 1 -->
                     <div class="project-card reveal">
+                        <div class="project-thumb">Thumbnail</div>
+                        <div class="project-content">
                         <div class="project-header">
                             <h3 class="project-title">LG Aimers 9기 (AI 연구·R&D)</h3>
                             <span class="project-period">2026.06 - 2026.09</span>
@@ -506,10 +568,13 @@
                             <span class="project-tag">LG AI Research</span>
                             <span class="project-tag">AI R&D</span>
                         </div>
+                        </div>
                     </div>
 
                     <!-- Activity 2 -->
                     <div class="project-card reveal">
+                        <div class="project-thumb">Thumbnail</div>
+                        <div class="project-content">
                         <div class="project-header">
                             <h3 class="project-title">2026 CNU X Upstage AI Workflow Workshop</h3>
                             <span class="project-period">2026</span>
@@ -521,10 +586,13 @@
                             <span class="project-tag">Upstage</span>
                             <span class="project-tag">AI Workflow</span>
                         </div>
+                        </div>
                     </div>
 
                     <!-- Activity 3 -->
                     <div class="project-card reveal">
+                        <div class="project-thumb">Thumbnail</div>
+                        <div class="project-content">
                         <div class="project-header">
                             <h3 class="project-title">2026 AI·SW 중심대학 디지털 경진대회 (AI부문)</h3>
                             <span class="project-period">2026</span>
@@ -536,10 +604,13 @@
                             <span class="project-tag">AI Competition</span>
                             <span class="project-tag">Hackathon</span>
                         </div>
+                        </div>
                     </div>
 
                     <!-- Activity 4 -->
                     <div class="project-card reveal">
+                        <div class="project-thumb">Thumbnail</div>
+                        <div class="project-content">
                         <div class="project-header">
                             <h3 class="project-title">NYPC (Nexon Youth Programming Challenge)</h3>
                             <span class="project-period">Past</span>
@@ -550,6 +621,7 @@
                         <div class="project-tags">
                             <span class="project-tag">Algorithm</span>
                             <span class="project-tag">Problem Solving</span>
+                        </div>
                         </div>
                     </div>
                 </div>
