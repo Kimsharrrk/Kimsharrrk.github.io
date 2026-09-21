@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>김건희 | Software Engineer</title>
+    
+    <!-- Pretendard Font (Standard for Clean Korean UI) -->
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable.css" />
+
+    <style>
+        :root {
+            /* Light, clean color palette */
+            --bg-main: #ffffff;
+            --bg-sub: #f8f9fa;
+            --bg-card: #ffffff;
+            
+            --text-title: #212529;
+            --text-body: #495057;
+            --text-muted: #868e96;
+            
+            --border-light: #e9ecef;
+            --border-hover: #dee2e6;
+            
+            --accent: #3b82f6; /* Soft blue */
+            --accent-bg: #eff6ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-body);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            word-break: keep-all;
+        }
+
+        ::selection {
+            background-color: var(--accent-bg);
+            color: var(--accent);
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        a:hover {
+            color: var(--accent);
+        }
+
+        /* Container */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        header {
+            padding: 40px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .logo {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--text-title);
+            letter-spacing: -0.01em;
+        }
+
+        nav {
+            display: flex;
+            gap: 24px;
+        }
+
+        nav a {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        nav a:hover {
+            color: var(--text-title);
+        }
+
+        /* Section Global */
+        section {
+            margin-bottom: 120px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-title);
+            margin-bottom: 32px;
+            letter-spacing: -0.02em;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 60px 0 80px 0;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text-title);
+            line-height: 1.3;
+            letter-spacing: -0.03em;
+            margin-bottom: 24px;
+        }
+
+        .hero p {
+            font-size: 1.125rem;
+            color: var(--text-body);
+            line-height: 1.7;
+            margin-bottom: 40px;
+            max-width: 650px;
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 16px;
+        }
+
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            background-color: var(--bg-sub);
+            color: var(--text-title);
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+        }
+
+        .contact-btn:hover {
+            background-color: var(--border-light);
+        }
+
+        .contact-btn.primary {
+            background-color: var(--text-title);
+            color: #fff;
+        }
+
+        .contact-btn.primary:hover {
+            background-color: #000;
+        }
+
+        /* Stacks (Like kimjy-portfolio) */
+        .stack-group {
+            margin-bottom: 32px;
+        }
+
+        .stack-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .stack-category {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        .stack-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .stack-item {
+            padding: 8px 16px;
+            background-color: var(--bg-main);
+            border: 1px solid var(--border-light);
+            border-radius: 20px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-title);
+            transition: border-color 0.2s ease;
+        }
+        
+        .stack-item:hover {
+            border-color: var(--text-muted);
+        }
+
+        /* Projects (Like leeboa.com) */
+        .project-list {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .project-card {
+            padding: 32px;
+            background-color: var(--bg-main);
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.04);
+            border-color: var(--border-hover);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .project-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-title);
+        }
+
+        .project-period {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .project-desc {
+            font-size: 1rem;
+            color: var(--text-body);
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .project-tag {
+            padding: 4px 10px;
+            background-color: var(--accent-bg);
+            color: var(--accent);
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* Background/Education */
+        .edu-item {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border-light);
+            margin-bottom: 24px;
+        }
+
+        .edu-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .edu-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-title);
+        }
+
+        .edu-detail {
+            font-size: 1rem;
+            color: var(--text-muted);
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 0 60px 0;
+            border-top: 1px solid var(--border-light);
+            text-align: center;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        /* Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(15px);
+            animation: fadeUp 0.8s forwards cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <div class="logo">김건희</div>
+            <nav>
+                <a href="#about">About</a>
+                <a href="#stacks">Stacks</a>
+                <a href="#projects">Projects</a>
+            </nav>
+        </header>
+
+        <main>
+            <!-- Hero / About -->
+            <section id="about" class="hero">
+                <h1 class="reveal">안녕하세요,<br>안정적인 시스템을 고민하는<br>개발자 김건희입니다.</h1>
+                <p class="reveal delay-1">
+                    단순히 기능이 동작하는 코드를 넘어, 데이터가 이동하는 네트워크 계층부터 최상단의 인공지능 모델(LLM)까지 전체적인 아키텍처와 보안을 중요하게 생각합니다. 사용자에게 신뢰를 줄 수 있는 견고한 서비스를 만드는 것을 목표로 합니다.
+                </p>
+                <div class="contact-links reveal delay-2">
+                    <a href="mailto:kimsharrrk@naver.com" class="contact-btn primary">이메일 보내기</a>
+                    <a href="https://github.com/Kimsharrrk" target="_blank" class="contact-btn">GitHub 방문</a>
+                </div>
+            </section>
+
+            <!-- Stacks (kimjy-portfolio reference) -->
+            <section id="stacks" class="reveal delay-3">
+                <h2 class="section-title">Tech Stacks</h2>
+                
+                <div class="stack-group">
+                    <div class="stack-category">Network & Security</div>
+                    <div class="stack-list">
+                        <div class="stack-item">TCP/IP Protocol</div>
+                        <div class="stack-item">Socket Programming</div>
+                        <div class="stack-item">Cryptography</div>
+                        <div class="stack-item">Wireshark</div>
+                    </div>
+                </div>
+
+                <div class="stack-group">
+                    <div class="stack-category">AI & Backend</div>
+                    <div class="stack-list">
+                        <div class="stack-item">Python</div>
+                        <div class="stack-item">C++</div>
+                        <div class="stack-item">LLM Integration (OpenAI)</div>
+                        <div class="stack-item">Prompt Engineering</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Projects (leeboa.com reference) -->
+            <section id="projects">
+                <h2 class="section-title">Projects</h2>
+                
+                <div class="project-list">
+                    <!-- Project 1 -->
+                    <div class="project-card reveal">
+                        <div class="project-header">
+                            <h3 class="project-title">LLM 기반 네트워크 이상 탐지 봇</h3>
+                            <span class="project-period">2026. Personal Project</span>
+                        </div>
+                        <p class="project-desc">
+                            대량의 서버 로그와 패킷을 실시간으로 분석하여, 비정상적인 트래픽이나 침입 시도를 식별하는 보안 파이프라인 프로토타입입니다. LLM을 연동하여 복잡한 네트워크 로그를 자연어로 요약하고 즉각적인 경고를 발생시킵니다.
+                        </p>
+                        <div class="project-tags">
+                            <span class="project-tag">Python</span>
+                            <span class="project-tag">OpenAI API</span>
+                            <span class="project-tag">Network Security</span>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="project-card reveal">
+                        <div class="project-header">
+                            <h3 class="project-title">Secure P2P Chat Protocol</h3>
+                            <span class="project-period">2026. Academic Project</span>
+                        </div>
+                        <p class="project-desc">
+                            중앙 서버를 거치지 않고 클라이언트 간 직접 연결을 통해 통신하는 초경량 P2P 채팅 애플리케이션입니다. 메시지 유출을 방지하기 위해 종단간 암호화(E2EE, AES-256)를 적용하여 보안성을 극대화했습니다.
+                        </p>
+                        <div class="project-tags">
+                            <span class="project-tag">C++</span>
+                            <span class="project-tag">Socket Programming</span>
+                            <span class="project-tag">AES-256</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Education -->
+            <section class="reveal">
+                <h2 class="section-title">Background</h2>
+                
+                <div class="edu-item">
+                    <span class="edu-title">공주대학교 소프트웨어학과</span>
+                    <span class="edu-detail">학사 과정 진행 중</span>
+                </div>
+                <div class="edu-item">
+                    <span class="edu-title">미래첨단기술과 이해I</span>
+                    <span class="edu-detail">수강 과정</span>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="reveal">
+            <p>© 2026 김건희. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <!-- Intersection Observer for Scroll Animation -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            document.querySelectorAll('.reveal').forEach(el => {
+                el.style.animationPlayState = 'paused';
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
