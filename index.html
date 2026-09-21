@@ -240,8 +240,34 @@
         .project-desc {
             font-size: 1rem;
             color: var(--text-body);
-            margin-bottom: 24px;
+            margin-bottom: 16px;
             line-height: 1.6;
+        }
+
+        .project-details {
+            margin-bottom: 24px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--text-body);
+            background-color: var(--bg-sub);
+            padding: 16px;
+            border-radius: 8px;
+        }
+
+        .project-details li {
+            display: flex;
+            margin-bottom: 8px;
+            list-style: none;
+        }
+        
+        .project-details li:last-child {
+            margin-bottom: 0;
+        }
+
+        .project-details li strong {
+            min-width: 70px;
+            color: var(--text-title);
+            font-weight: 600;
         }
 
         .project-tags {
@@ -330,8 +356,9 @@
         <main>
             <!-- Hero / About -->
             <section id="about" class="hero">
-                <h1 class="reveal">안녕하세요,<br>안정적인 시스템을 고민하는<br>개발자 김건희입니다.</h1>
-                <p class="reveal delay-1">
+                <div class="reveal" style="font-size: 0.95rem; font-weight: 700; color: var(--accent); margin-bottom: 16px; letter-spacing: 0.05em;">NETWORK & AI SYSTEM ENGINEER</div>
+                <h1 class="reveal delay-1">안정적인 인프라와 지능형 시스템의<br>융합을 설계하는 김건희입니다.</h1>
+                <p class="reveal delay-2">
                     단순히 기능이 동작하는 코드를 넘어, 데이터가 이동하는 네트워크 계층부터 최상단의 인공지능 모델(LLM)까지 전체적인 아키텍처와 보안을 중요하게 생각합니다. 사용자에게 신뢰를 줄 수 있는 견고한 서비스를 만드는 것을 목표로 합니다.
                 </p>
                 <div class="contact-links reveal delay-2">
@@ -374,11 +401,17 @@
                     <div class="project-card reveal">
                         <div class="project-header">
                             <h3 class="project-title">LLM 기반 네트워크 이상 탐지 봇</h3>
-                            <span class="project-period">2026. Personal Project</span>
+                            <span class="project-period">2026.03 - 2026.06 (Personal Project)</span>
                         </div>
                         <p class="project-desc">
-                            대량의 서버 로그와 패킷을 실시간으로 분석하여, 비정상적인 트래픽이나 침입 시도를 식별하는 보안 파이프라인 프로토타입입니다. LLM을 연동하여 복잡한 네트워크 로그를 자연어로 요약하고 즉각적인 경고를 발생시킵니다.
+                            대량의 서버 로그와 패킷을 실시간으로 분석하여, 비정상적인 트래픽이나 침입 시도를 식별하는 보안 파이프라인 프로토타입입니다.
                         </p>
+                        <ul class="project-details">
+                            <li><strong>Mission</strong> <span>기존 룰 기반 탐지의 한계를 넘기 위해 자연어 맥락 추론이 가능한 LLM 도입</span></li>
+                            <li><strong>Role</strong> <span>1인 기획 및 풀스택 개발 (기여도 100%)</span></li>
+                            <li><strong>Result</strong> <span>Wireshark 패킷 데이터를 파싱하여 비정상 패턴 탐지 시나리오 성공적 시연</span></li>
+                            <li><strong>Insight</strong> <span>네트워크 로그와 같이 정형화되지 않은 방대한 데이터를 프롬프트 엔지니어링을 통해 유의미한 정보로 정제하는 노하우를 터득함.</span></li>
+                        </ul>
                         <div class="project-tags">
                             <span class="project-tag">Python</span>
                             <span class="project-tag">OpenAI API</span>
@@ -390,11 +423,17 @@
                     <div class="project-card reveal">
                         <div class="project-header">
                             <h3 class="project-title">Secure P2P Chat Protocol</h3>
-                            <span class="project-period">2026. Academic Project</span>
+                            <span class="project-period">2026.09 - 진행 중 (Academic Project)</span>
                         </div>
                         <p class="project-desc">
-                            중앙 서버를 거치지 않고 클라이언트 간 직접 연결을 통해 통신하는 초경량 P2P 채팅 애플리케이션입니다. 메시지 유출을 방지하기 위해 종단간 암호화(E2EE, AES-256)를 적용하여 보안성을 극대화했습니다.
+                            중앙 서버를 거치지 않고 클라이언트 간 직접 연결을 통해 통신하는 초경량 P2P 채팅 애플리케이션입니다.
                         </p>
+                        <ul class="project-details">
+                            <li><strong>Mission</strong> <span>메시지 유출을 원천 차단하는 가장 안전하고 가벼운 통신 프로토콜 설계</span></li>
+                            <li><strong>Role</strong> <span>Core Protocol 설계 및 종단간 암호화(E2EE) 모듈 개발 (기여도 70%)</span></li>
+                            <li><strong>Result</strong> <span>AES-256을 적용한 안전한 소켓 통신 구현 성공</span></li>
+                            <li><strong>Insight</strong> <span>보안과 성능(지연 시간) 사이의 트레이드오프를 경험하며, 시스템 아키텍처 수준에서의 암호화 키 교환 로직을 깊이 이해함.</span></li>
+                        </ul>
                         <div class="project-tags">
                             <span class="project-tag">C++</span>
                             <span class="project-tag">Socket Programming</span>
@@ -530,10 +569,20 @@
                 </div>
             </section>
 
+            <!-- Ending Message -->
+            <section class="reveal" style="text-align: center; margin-top: 80px; margin-bottom: 60px;">
+                <h2 style="font-size: 1.75rem; font-weight: 800; color: var(--text-title); margin-bottom: 16px; letter-spacing: -0.03em;">
+                    안정적인 인프라와 지능형 시스템,<br>그 최전선에서 기여하겠습니다.
+                </h2>
+                <p style="font-size: 1.1rem; color: var(--text-body); max-width: 600px; margin: 0 auto 32px auto; line-height: 1.6;">
+                    보안이 담보된 견고한 네트워크 아키텍처 위에 LLM을 비롯한 최신 기술을 접목하여, 예측 불가능한 변수 앞에서도 멈추지 않는 서비스를 설계하는 엔지니어가 되겠습니다.
+                </p>
+                <a href="mailto:kimsharrrk@naver.com" class="contact-btn primary" style="font-size: 1.1rem; padding: 16px 32px; border-radius: 12px;">합류 제안하기 (Contact)</a>
+            </section>
         </main>
 
         <footer class="reveal">
-            <p>© 2026 김건희. All rights reserved.</p>
+            <p>© 2026 김건희 (KIM GEON HUI). All rights reserved.</p>
         </footer>
     </div>
 
