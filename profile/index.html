@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>김건희 | Network & AI System Engineer</title>
+    <link rel="stylesheet" as="style" crossorigin
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+    <script src="js/main.js" defer></script>
+</head>
+
+<body>
+
+    <!-- Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="nav-inner">
+            <div class="logo">KimGeonHui.</div>
+            <nav>
+                <a href="#about">About</a>
+                <a href="#stacks">Stacks</a>
+                <a href="#projects">Projects</a>
+                <a href="#activities">Activities</a>
+                <a href="#github">GitHub</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ── HERO ─────────────────────────── -->
+    <section id="about" class="hero">
+        <div class="container">
+            <div class="hero-inner">
+                <div class="hero-text">
+                    <span class="hero-tag">Network &amp; AI System Engineer</span>
+                    <h1 class="hero-title">안정적인 인프라와<br>지능형 시스템의 융합</h1>
+                    <p class="hero-desc">
+                        데이터가 이동하는 네트워크 계층부터 최상단의 AI 모델(LLM)까지,<br>
+                        전체 아키텍처와 보안을 함께 생각하는 엔지니어 김건희입니다.
+                    </p>
+                    <div class="btn-group">
+                        <a href="mailto:kimsharrrk@naver.com" class="btn btn-primary">합류 제안하기</a>
+                        <a href="https://github.com/Kimsharrrk" target="_blank" class="btn btn-outline">GitHub ↗</a>
+                    </div>
+                </div>
+                <div class="hero-avatar">
+                    <img src="profile.png" alt="김건희 프로필 사진" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── STACKS ────────────────────────── -->
+    <section id="stacks">
+        <div class="container">
+            <div class="section-label">Tech Stacks</div>
+            <h2 class="section-title" style="text-align:center">사용하는 기술들</h2>
+            <p class="section-desc">주요 기술 스택과 도구들입니다.</p>
+            <div class="stack-grid">
+                <div class="stack-card">
+                    <div class="stack-card-title">Network &amp; Security</div>
+                    <div class="stack-items">
+                        <span class="stack-item"><i class="devicon-linux-plain colored"></i>Linux</span>
+                        <span class="stack-item"><i class="devicon-bash-plain colored"></i>Bash</span>
+                        <span class="stack-item"><i
+                                class="devicon-amazonwebservices-plain-wordmark colored"></i>AWS</span>
+                        <span class="stack-item">TCP/IP</span>
+                        <span class="stack-item">Socket</span>
+                        <span class="stack-item">Wireshark</span>
+                    </div>
+                </div>
+                <div class="stack-card">
+                    <div class="stack-card-title">AI &amp; Development</div>
+                    <div class="stack-items">
+                        <span class="stack-item"><i class="devicon-python-plain colored"></i>Python</span>
+                        <span class="stack-item"><i class="devicon-cplusplus-plain colored"></i>C++</span>
+                        <span class="stack-item"><i class="devicon-typescript-plain colored"></i>TypeScript</span>
+                        <span class="stack-item"><i class="devicon-swift-plain colored"></i>Swift</span>
+                        <span class="stack-item">OpenAI API</span>
+                        <span class="stack-item">LLM</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── PROJECTS ──────────────────────── -->
+    <section id="projects">
+        <div class="section-label">Projects</div>
+        <h2 class="section-title">현재까지 개발한 프로젝트입니다.</h2>
+        <p class="section-desc">프로젝트를 클릭하면 자세히 볼 수 있습니다.</p>
+
+        <div class="carousel-outer">
+            <div class="carousel-track" id="project-track">
+
+                <!-- P1 -->
+                <div class="project-card">
+                    <div class="project-thumb">Thumbnail</div>
+                    <div class="project-body">
+                        <div class="project-meta-row">
+                            <span class="project-period">2026.03 – 2026.06 · 개인 프로젝트</span>
+                            <div class="project-links">
+                                <a class="project-link" href="#">자세히 보기 →</a>
+                            </div>
+                        </div>
+                        <div class="project-name">LLM 기반 네트워크 이상 탐지 봇</div>
+                        <div class="project-desc">서버 로그와 패킷을 실시간으로 분석하여 비정상적인 트래픽이나 침입 시도를 식별하는 보안 파이프라인 프로토타입입니다.</div>
+                        <div class="project-tags">
+                            <span class="project-tag">Python</span>
+                            <span class="project-tag">OpenAI API</span>
+                            <span class="project-tag">Network Security</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- P2 -->
+                <div class="project-card">
+                    <div class="project-thumb">Thumbnail</div>
+                    <div class="project-body">
+                        <div class="project-meta-row">
+                            <span class="project-period">2026.09 – 진행 중 · Academic</span>
+                            <div class="project-links">
+                                <a class="project-link" href="#">자세히 보기 →</a>
+                            </div>
+                        </div>
+                        <div class="project-name">Secure P2P Chat Protocol</div>
+                        <div class="project-desc">중앙 서버 없이 클라이언트 간 직접 연결로 통신하는 초경량 P2P 채팅 앱. AES-256 종단간 암호화(E2EE) 적용.
+                        </div>
+                        <div class="project-tags">
+                            <span class="project-tag">C++</span>
+                            <span class="project-tag">Socket</span>
+                            <span class="project-tag">AES-256</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- P3 -->
+                <div class="project-card">
+                    <div class="project-thumb">Thumbnail</div>
+                    <div class="project-body">
+                        <div class="project-meta-row">
+                            <span class="project-period">Personal Project</span>
+                            <div class="project-links">
+                                <a class="project-link" href="https://github.com/Kimsharrrk/monster-typing-pretext"
+                                    target="_blank">GitHub ↗</a>
+                            </div>
+                        </div>
+                        <div class="project-name">Monster Typing Pretext</div>
+                        <div class="project-desc">TypeScript 기반 타자 연습 게임 웹 애플리케이션. 입력과 화면 업데이트 간 지연을 최소화한 인터랙션 구현.</div>
+                        <div class="project-tags">
+                            <span class="project-tag">TypeScript</span>
+                            <span class="project-tag">Web Frontend</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- P4 -->
+                <div class="project-card">
+                    <div class="project-thumb">Thumbnail</div>
+                    <div class="project-body">
+                        <div class="project-meta-row">
+                            <span class="project-period">Personal Project</span>
+                            <div class="project-links">
+                                <a class="project-link" href="https://github.com/Kimsharrrk/SidecarSnap"
+                                    target="_blank">GitHub ↗</a>
+                            </div>
+                        </div>
+                        <div class="project-name">SidecarSnap</div>
+                        <div class="project-desc">Swift로 개발한 Apple 네이티브 유틸리티 앱. 시스템 레벨에서 사용자 편의성 향상 기능 연동.</div>
+                        <div class="project-tags">
+                            <span class="project-tag">Swift</span>
+                            <span class="project-tag">Apple Native</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- P5 -->
+                <div class="project-card">
+                    <div class="project-thumb">Thumbnail</div>
+                    <div class="project-body">
+                        <div class="project-meta-row">
+                            <span class="project-period">Personal Project</span>
+                            <div class="project-links">
+                                <a class="project-link" href="https://github.com/Kimsharrrk/globe-pretext"
+                                    target="_blank">GitHub ↗</a>
+                            </div>
+                        </div>
+                        <div class="project-name">Globe Pretext</div>
+                        <div class="project-desc">3D 지구본 렌더링 시각화 프로젝트. TypeScript로 좌표 데이터를 인터랙티브하게 브라우저에 매핑.</div>
+                        <div class="project-tags">
+                            <span class="project-tag">TypeScript</span>
+                            <span class="project-tag">3D Visualization</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- P6 -->
+                <div class="project-card">
+                    <div class="project-thumb">Thumbnail</div>
+                    <div class="project-body">
+                        <div class="project-meta-row">
+                            <span class="project-period">Personal Project</span>
+                            <div class="project-links">
+                                <a class="project-link" href="https://github.com/Kimsharrrk/interactive-portfolio"
+                                    target="_blank">GitHub ↗</a>
+                            </div>
+                        </div>
+                        <div class="project-name">Interactive Portfolio</div>
+                        <div class="project-desc">사용자와 상호작용하는 인터랙티브 웹 포트폴리오. GSAP 기반 스크롤 애니메이션과 세련된 UI.</div>
+                        <div class="project-tags">
+                            <span class="project-tag">HTML/CSS</span>
+                            <span class="project-tag">JavaScript</span>
+                            <span class="project-tag">GSAP</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DUPLICATE for seamless loop -->
+                <!-- P1 dup -->
+                <div class="project-card">
+                    <div class="project-thumb">Thumbnail</div>
+                    <div class="project-body">
+                        <div class="project-meta-row">
+                            <span class="project-period">2026.03 – 2026.06 · 개인 프로젝트</span>
+                            <div class="project-links"><a class="project-link" href="#">자세히 보기 →</a></div>
+                        </div>
+                        <div class="project-name">LLM 기반 네트워크 이상 탐지 봇</div>
+                        <div class="project-desc">서버 로그와 패킷을 실시간으로 분석하여 비정상적인 트래픽이나 침입 시도를 식별하는 보안 파이프라인 프로토타입입니다.</div>
+                        <div class="project-tags"><span class="project-tag">Python</span><span
+                                class="project-tag">OpenAI API</span><span class="project-tag">Network Security</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- P2 dup -->
+                <div class="project-card">
+                    <div class="project-thumb">Thumbnail</div>
+                    <div class="project-body">
+                        <div class="project-meta-row">
+                            <span class="project-period">2026.09 – 진행 중 · Academic</span>
+                            <div class="project-links"><a class="project-link" href="#">자세히 보기 →</a></div>
+                        </div>
+                        <div class="project-name">Secure P2P Chat Protocol</div>
+                        <div class="project-desc">중앙 서버 없이 클라이언트 간 직접 연결로 통신하는 초경량 P2P 채팅 앱. AES-256 종단간 암호화(E2EE) 적용.
+                        </div>
+                        <div class="project-tags"><span class="project-tag">C++</span><span
+                                class="project-tag">Socket</span><span class="project-tag">AES-256</span></div>
+                    </div>
+                </div>
+                <!-- P3 dup -->
+                <div class="project-card">
+                    <div class="project-thumb">Thumbnail</div>
+                    <div class="project-body">
+                        <div class="project-meta-row">
+                            <span class="project-period">Personal Project</span>
+                            <div class="project-links"><a class="project-link"
+                                    href="https://github.com/Kimsharrrk/monster-typing-pretext" target="_blank">GitHub
+                                    ↗</a></div>
+                        </div>
+                        <div class="project-name">Monster Typing Pretext</div>
+                        <div class="project-desc">TypeScript 기반 타자 연습 게임 웹 애플리케이션. 입력과 화면 업데이트 간 지연을 최소화한 인터랙션 구현.</div>
+                        <div class="project-tags"><span class="project-tag">TypeScript</span><span
+                                class="project-tag">Web Frontend</span></div>
+                    </div>
+                </div>
+                <!-- P4 dup -->
+                <div class="project-card">
+                    <div class="project-thumb">Thumbnail</div>
+                    <div class="project-body">
+                        <div class="project-meta-row">
+                            <span class="project-period">Personal Project</span>
+                            <div class="project-links"><a class="project-link"
+                                    href="https://github.com/Kimsharrrk/SidecarSnap" target="_blank">GitHub ↗</a></div>
+                        </div>
+                        <div class="project-name">SidecarSnap</div>
+                        <div class="project-desc">Swift로 개발한 Apple 네이티브 유틸리티 앱. 시스템 레벨에서 사용자 편의성 향상 기능 연동.</div>
+                        <div class="project-tags"><span class="project-tag">Swift</span><span class="project-tag">Apple
+                                Native</span></div>
+                    </div>
+                </div>
+                <!-- P5 dup -->
+                <div class="project-card">
+                    <div class="project-thumb">Thumbnail</div>
+                    <div class="project-body">
+                        <div class="project-meta-row">
+                            <span class="project-period">Personal Project</span>
+                            <div class="project-links"><a class="project-link"
+                                    href="https://github.com/Kimsharrrk/globe-pretext" target="_blank">GitHub ↗</a>
+                            </div>
+                        </div>
+                        <div class="project-name">Globe Pretext</div>
+                        <div class="project-desc">3D 지구본 렌더링 시각화 프로젝트. TypeScript로 좌표 데이터를 인터랙티브하게 브라우저에 매핑.</div>
+                        <div class="project-tags"><span class="project-tag">TypeScript</span><span
+                                class="project-tag">3D Visualization</span></div>
+                    </div>
+                </div>
+                <!-- P6 dup -->
+                <div class="project-card">
+                    <div class="project-thumb">Thumbnail</div>
+                    <div class="project-body">
+                        <div class="project-meta-row">
+                            <span class="project-period">Personal Project</span>
+                            <div class="project-links"><a class="project-link"
+                                    href="https://github.com/Kimsharrrk/interactive-portfolio" target="_blank">GitHub
+                                    ↗</a></div>
+                        </div>
+                        <div class="project-name">Interactive Portfolio</div>
+                        <div class="project-desc">사용자와 상호작용하는 인터랙티브 웹 포트폴리오. GSAP 기반 스크롤 애니메이션과 세련된 UI.</div>
+                        <div class="project-tags"><span class="project-tag">HTML/CSS</span><span
+                                class="project-tag">JavaScript</span><span class="project-tag">GSAP</span></div>
+                    </div>
+                </div>
+
+            </div><!-- /carousel-track -->
+        </div><!-- /carousel-outer -->
+    </section>
+
+    <!-- ── ACTIVITIES ─────────────────────── -->
+    <section id="activities">
+        <div class="section-label">Activities &amp; Awards</div>
+        <h2 class="section-title" style="text-align:center">대회 및 활동</h2>
+        <p class="section-desc">참여한 해커톤, 대회, 활동 이력입니다.</p>
+
+        <div class="carousel-outer">
+            <div class="carousel-track" id="activity-track" style="animation-duration: 35s;">
+
+                <!-- A1 -->
+                <div class="project-card">
+                    <div class="project-thumb" style="background: linear-gradient(135deg, #d50000 0%, #ff6f00 100%);">
+                        <span style="color:#fff; font-weight:800; font-size:1.5rem;">LG</span>
+                    </div>
+                    <div class="project-body">
+                        <div class="project-meta-row">
+                            <span class="project-period">2026.06 – 2026.09</span>
+                        </div>
+                        <div class="project-name">LG Aimers 9기 (AI 연구·R&D)</div>
+                        <div class="project-desc">LG경영개발원 AI연구원 주관 청년 일경험 지원사업. AI Workflow 및 실무 R&D 역량 강화.</div>
+                        <div class="project-tags"><span class="project-tag">LG AI Research</span><span
+                                class="project-tag">AI R&D</span></div>
+                    </div>
+                </div>
+
+                <!-- A2 -->
+                <div class="project-card">
+                    <div class="project-thumb" style="background: linear-gradient(135deg, #6c47ff 0%, #a78bfa 100%);">
+                        <span style="color:#fff; font-weight:800; font-size:1.2rem;">Upstage</span>
+                    </div>
+                    <div class="project-body">
+                        <div class="project-meta-row">
+                            <span class="project-period">2026</span>
+                        </div>
+                        <div class="project-name">2026 CNU × Upstage AI Workflow Workshop</div>
+                        <div class="project-desc">충남대 & 업스테이지 공동 주관 AI 워크플로우 해커톤/워크샵 참여.</div>
+                        <div class="project-tags"><span class="project-tag">Upstage</span><span class="project-tag">AI
+                                Workflow</span></div>
+                    </div>
+                </div>
+
+                <!-- A3 -->
+                <div class="project-card">
+                    <div class="project-thumb" style="background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);">
+                        <span
+                            style="color:#fff; font-weight:800; font-size:1rem; text-align:center; padding: 8px;">AI·SW<br>경진대회</span>
+                    </div>
+                    <div class="project-body">
+                        <div class="project-meta-row">
+                            <span class="project-period">2026</span>
+                        </div>
+                        <div class="project-name">AI·SW 중심대학 디지털 경진대회 (AI부문)</div>
+                        <div class="project-desc">AI 기술 활용 서비스 기획 및 구현 능력을 검증받으며 실전 프로젝트 경험을 쌓았습니다.</div>
+                        <div class="project-tags"><span class="project-tag">AI Competition</span><span
+                                class="project-tag">Hackathon</span></div>
+                    </div>
+                </div>
+
+                <!-- A4 -->
+                <div class="project-card">
+                    <div class="project-thumb" style="background: linear-gradient(135deg, #064e3b 0%, #10b981 100%);">
+                        <span style="color:#fff; font-weight:800; font-size:1.5rem;">NYPC</span>
+                    </div>
+                    <div class="project-body">
+                        <div class="project-meta-row">
+                            <span class="project-period">Past</span>
+                        </div>
+                        <div class="project-name">NYPC (Nexon Youth Programming Challenge)</div>
+                        <div class="project-desc">넥슨 주최 청소년 프로그래밍 대회 참가. 알고리즘 설계 및 논리적 문제 해결 능력 강화.</div>
+                        <div class="project-tags"><span class="project-tag">Algorithm</span><span
+                                class="project-tag">Problem Solving</span></div>
+                    </div>
+                </div>
+
+                <!-- DUPLICATE for seamless loop -->
+                <div class="project-card">
+                    <div class="project-thumb" style="background: linear-gradient(135deg, #d50000 0%, #ff6f00 100%);">
+                        <span style="color:#fff; font-weight:800; font-size:1.5rem;">LG</span>
+                    </div>
+                    <div class="project-body">
+                        <div class="project-meta-row"><span class="project-period">2026.06 – 2026.09</span></div>
+                        <div class="project-name">LG Aimers 9기 (AI 연구·R&D)</div>
+                        <div class="project-desc">LG경영개발원 AI연구원 주관 청년 일경험 지원사업. AI Workflow 및 실무 R&D 역량 강화.</div>
+                        <div class="project-tags"><span class="project-tag">LG AI Research</span><span
+                                class="project-tag">AI R&D</span></div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-thumb" style="background: linear-gradient(135deg, #6c47ff 0%, #a78bfa 100%);">
+                        <span style="color:#fff; font-weight:800; font-size:1.2rem;">Upstage</span>
+                    </div>
+                    <div class="project-body">
+                        <div class="project-meta-row"><span class="project-period">2026</span></div>
+                        <div class="project-name">2026 CNU × Upstage AI Workflow Workshop</div>
+                        <div class="project-desc">충남대 & 업스테이지 공동 주관 AI 워크플로우 해커톤/워크샵 참여.</div>
+                        <div class="project-tags"><span class="project-tag">Upstage</span><span class="project-tag">AI
+                                Workflow</span></div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-thumb" style="background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);">
+                        <span
+                            style="color:#fff; font-weight:800; font-size:1rem; text-align:center; padding: 8px;">AI·SW<br>경진대회</span>
+                    </div>
+                    <div class="project-body">
+                        <div class="project-meta-row"><span class="project-period">2026</span></div>
+                        <div class="project-name">AI·SW 중심대학 디지털 경진대회 (AI부문)</div>
+                        <div class="project-desc">AI 기술 활용 서비스 기획 및 구현 능력을 검증받으며 실전 프로젝트 경험.</div>
+                        <div class="project-tags"><span class="project-tag">AI Competition</span><span
+                                class="project-tag">Hackathon</span></div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-thumb" style="background: linear-gradient(135deg, #064e3b 0%, #10b981 100%);">
+                        <span style="color:#fff; font-weight:800; font-size:1.5rem;">NYPC</span>
+                    </div>
+                    <div class="project-body">
+                        <div class="project-meta-row"><span class="project-period">Past</span></div>
+                        <div class="project-name">NYPC (Nexon Youth Programming Challenge)</div>
+                        <div class="project-desc">넥슨 주최 청소년 프로그래밍 대회 참가. 알고리즘 및 논리적 문제 해결 능력 강화.</div>
+                        <div class="project-tags"><span class="project-tag">Algorithm</span><span
+                                class="project-tag">Problem Solving</span></div>
+                    </div>
+                </div>
+
+            </div><!-- /carousel-track -->
+        </div><!-- /carousel-outer -->
+    </section>
+
+    <!-- ── BACKGROUND / EDUCATION ────────── -->
+    <section id="background">
+        <div class="container">
+            <div class="section-label">Background</div>
+            <h2 class="section-title" style="text-align:center">교육 및 어학</h2>
+
+            <div class="edu-section">
+
+                <div class="edu-category-label">교육</div>
+
+                <div class="edu-row">
+                    <div class="edu-period">재학 중</div>
+                    <div class="edu-content">
+                        <div class="edu-title">공주대학교 소프트웨어학과</div>
+                        <div class="edu-sub">소프트웨어학과</div>
+                        <ul class="edu-bullets">
+                            <li>네트워크 보안, 운영체제, 자료구조, 알고리즘 등 CS 기초 학습</li>
+                            <li>LLM 및 AI 시스템 통합 실습 과목 이수</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="edu-row">
+                    <div class="edu-period">수강 중</div>
+                    <div class="edu-content">
+                        <div class="edu-title">미래첨단기술과 이해 I</div>
+                        <div class="edu-sub">교양 과정</div>
+                        <ul class="edu-bullets">
+                            <li>AI, 블록체인, IoT 등 첨단 기술 트렌드 이해</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <hr class="edu-divider">
+
+                <div class="edu-category-label">자격 및 대회</div>
+
+                <div class="edu-row">
+                    <div class="edu-period">2026</div>
+                    <div class="edu-content">
+                        <div class="edu-title">LG Aimers 9기 수료</div>
+                        <div class="edu-sub">AI 연구·R&D 과정</div>
+                    </div>
+                </div>
+
+                <div class="edu-row">
+                    <div class="edu-period">2026</div>
+                    <div class="edu-content">
+                        <div class="edu-title">CNU × Upstage AI Workflow Workshop</div>
+                        <div class="edu-sub">수료증 취득</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ── GITHUB REPOS ───────────────────── -->
+    <section id="github">
+        <div class="container">
+            <div class="section-label">GitHub 저장소</div>
+            <h2 class="section-title" style="text-align:center">GitHub 저장소</h2>
+            <p class="section-desc">GitHub API로 실시간으로 불러오며, 최근에 만든 저장소부터 보여줍니다.</p>
+
+            <div class="github-filter" id="github-filters">
+                <button class="filter-btn active" id="filter-all">전체</button>
+            </div>
+            <div class="repo-grid" id="repo-grid">
+                <p class="repo-loading">불러오는 중...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── ENDING ─────────────────────────── -->
+    <section class="ending">
+        <div class="section-label">Contact</div>
+        <h2>Next Level System,<br>With You.</h2>
+        <p>보안이 담보된 견고한 네트워크 아키텍처 위에 최신 기술을 접목하여, 어떤 상황에서도 멈추지 않는 서비스를 함께 만들어가겠습니다.</p>
+        <a href="mailto:kimsharrrk@naver.com" class="btn btn-primary" style="font-size:1.1rem; padding:18px 40px;">합류
+            제안하기 →</a>
+    </section>
+
+    <footer>
+        <p>© 2026 KIM GEON HUI · kimsharrrk@naver.com</p>
+    </footer>
+
+</body>
+
+</html>
