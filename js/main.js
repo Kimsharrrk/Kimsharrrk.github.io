@@ -217,3 +217,62 @@ document.getElementById('filter-all').addEventListener('click', e => {
 });
 
 fetchRepos();
+
+
+// ── Project Modal Logic ──────────────────────────────
+const modalOverlay = document.getElementById('project-modal');
+const modalCloseBtn = document.getElementById('modal-close-btn');
+const modalTitle = document.getElementById('modal-title');
+const modalBody = document.getElementById('modal-body');
+
+const projectDetails = {
+    "LLM 기반 네트워크 이상 탐지 봇": `
+        <p><strong>프로젝트 설명:</strong></p>
+        <p>서버 로그와 패킷을 실시간으로 분석하여 비정상적인 트래픽이나 침입 시도를 식별하는 보안 파이프라인 프로토타입입니다.</p>
+        <p><strong>주요 기능:</strong></p>
+        <ul>
+            <li>네트워크 트래픽 캡처 및 전처리</li>
+            <li>OpenAI API를 활용한 로그 컨텍스트 분석 및 이상 징후 탐지</li>
+            <li>실시간 알림 및 모니터링 시스템 구축</li>
+        </ul>
+        <p><strong>기술 스택:</strong> Python, OpenAI API, Network Security, Wireshark</p>
+    `,
+    "Secure P2P Chat Protocol": `
+        <p><strong>프로젝트 설명:</strong></p>
+        <p>중앙 서버 없이 클라이언트 간 직접 연결로 통신하는 초경량 P2P 채팅 애플리케이션입니다.</p>
+        <p><strong>주요 기능:</strong></p>
+        <ul>
+            <li>C++ Socket 기반의 P2P 네트워크 아키텍처 설계</li>
+            <li>AES-256 종단간 암호화(E2EE)를 통한 메시지 보안</li>
+            <li>경량화된 통신 프로토콜 구현</li>
+        </ul>
+        <p><strong>기술 스택:</strong> C++, Socket, AES-256, Network Programming</p>
+    `
+};
+
+document.querySelectorAll('.project-link.modal-trigger').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const card = e.target.closest('.project-card');
+        const title = card.querySelector('.project-name').innerText;
+        
+        modalTitle.innerText = title;
+        modalBody.innerHTML = projectDetails[title] || "<p>세부 정보가 없습니다.</p>";
+        
+        modalOverlay.classList.add('active');
+        // Disable body scroll when modal is open
+        document.body.style.overflow = 'hidden';
+    });
+});
+
+modalCloseBtn.addEventListener('click', () => {
+    modalOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+});
+
+modalOverlay.addEventListener('click', (e) => {
+    if (e.target === modalOverlay) {
+        modalOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+});
