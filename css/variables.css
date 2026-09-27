@@ -1,0 +1,22 @@
+/* =====================
+   variables.css
+   ===================== */
+:root {
+    --bg-main: #ffffff;
+    --bg-sub: #f5f5f7;
+    --bg-card: #ffffff;
+
+    --text-title: #111111;
+    --text-body: #444444;
+    --text-muted: #999999;
+
+    --border-light: #e5e5e5;
+    --border-hover: #cccccc;
+
+    --accent: #2563eb;
+    --accent-bg: #eff6ff;
+
+    --container-max: 1100px;
+    --section-padding: 120px 0;
+    --transition-fast: 0.2s ease;
+}

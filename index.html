@@ -1,1441 +1,565 @@
 <!DOCTYPE html>
-<html lang="ko" class="scroll-smooth">
+<html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FASIONAD: 인간처럼 생각하는 자율주행 듀얼 브레인</title>
-    
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Syncopate:wght@700&display=swap" rel="stylesheet">
-    
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        bg: '#08090d',
-                        surface: '#10121a',
-                        surfaceBorder: '#1e2235',
-                        neonCyan: '#00f0ff',
-                        neonLime: '#ccff00',
-                        neonRed: '#ff2a5f',
-                        neonPurple: '#a855f7',
-                        neonBlue: '#3b82f6'
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        mono: ['JetBrains Mono', 'monospace'],
-                        sync: ['Syncopate', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
-    
-    <!-- FontAwesome CDN for Crisp Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-    <style>
-        ::selection {
-            background-color: #ccff00;
-            color: #000;
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 7px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #08090d;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #1e2235;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #00f0ff;
-        }
-
-        /* Radar Scanner Animation */
-        .radar-sweep {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: conic-gradient(from 0deg at 50% 50%, rgba(0, 240, 255, 0.4) 0deg, rgba(0, 240, 255, 0.05) 60deg, transparent 61deg);
-            animation: radarRotate 4s linear infinite;
-        }
-
-        @keyframes radarRotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        /* Pulse Dot */
-        @keyframes pulseGlow {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.4; transform: scale(1.3); }
-        }
-        .pulse-active {
-            animation: pulseGlow 1.6s ease-in-out infinite;
-        }
-
-        /* Cyberpunk Grid Background */
-        .cyber-grid {
-            background-size: 40px 40px;
-            background-image: 
-                linear-gradient(to right, rgba(30, 34, 53, 0.4) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(30, 34, 53, 0.4) 1px, transparent 1px);
-        }
-    </style>
+    <title>김건희 | Network & AI System Engineer</title>
+    <link rel="stylesheet" as="style" crossorigin
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+    <script src="js/main.js" defer></script>
 </head>
-<body class="bg-bg text-zinc-100 font-sans antialiased overflow-x-hidden selection:bg-neonLime selection:text-black">
 
-    <!-- Top Navigation & 5-Minute Presentation Controller Bar -->
-    <header class="fixed top-0 left-0 right-0 z-50 bg-bg/85 backdrop-blur-md border-b border-surfaceBorder">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <a href="#hero" class="flex items-center gap-3">
-                <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-neonCyan to-neonLime flex items-center justify-center text-black font-mono font-bold text-xs">
-                    F
-                </div>
-                <div class="flex flex-col">
-                    <span class="font-sync text-sm font-bold tracking-wider text-white">FASIONAD</span>
-                    <span class="text-[10px] font-mono text-neonCyan tracking-widest uppercase">Dual-Brain Driving AI</span>
-                </div>
-            </a>
+<body>
 
-            <!-- Navigation Links -->
-            <nav class="hidden md:flex items-center gap-6 text-xs font-mono tracking-wider text-zinc-400">
-                <a href="#problem" class="hover:text-neonCyan transition-colors">01. 딜레마</a>
-                <a href="#architecture" class="hover:text-neonCyan transition-colors">02. 아키텍처</a>
-                <a href="#viewer" class="hover:text-neonCyan transition-colors text-neonLime font-bold flex items-center gap-1.5">
-                    <span class="w-1.5 h-1.5 rounded-full bg-neonLime pulse-active"></span> 03. 라이브 시뮬레이터
-                </a>
-                <a href="#metrics" class="hover:text-neonCyan transition-colors">04. 성과 지표</a>
-                <a href="#team" class="hover:text-neonCyan transition-colors">05. 조원 소개</a>
+    <!-- Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="nav-inner">
+            <div class="logo">KimGeonHui.</div>
+            <nav>
+                <a href="#about">About</a>
+                <a href="#stacks">Stacks</a>
+                <a href="#projects">Projects</a>
+                <a href="#activities">Activities</a>
+                <a href="./fasionad/" target="_blank" style="color: var(--accent); font-weight: 700;">FASIONAD ↗</a>
+                <a href="#github">GitHub</a>
             </nav>
-
-            <!-- 5-Minute Presentation Controller & Timer -->
-            <div class="flex items-center gap-3 bg-surface border border-surfaceBorder rounded-full px-3 py-1.5">
-                <div class="flex items-center gap-1.5 text-xs font-mono">
-                    <i class="fa-regular fa-clock text-neonLime"></i>
-                    <span id="timerDisplay" class="font-bold text-white tracking-widest">05:00</span>
-                </div>
-                <div class="h-3 w-px bg-surfaceBorder"></div>
-                <button id="timerToggleBtn" class="text-xs px-2 py-0.5 rounded bg-surfaceBorder hover:bg-neonCyan hover:text-black transition-all text-zinc-300 font-mono" title="타이머 시작/정지">
-                    <i id="timerIcon" class="fa-solid fa-play text-[10px]"></i>
-                </button>
-                <button id="timerResetBtn" class="text-xs px-2 py-0.5 rounded hover:bg-zinc-800 transition-all text-zinc-400 font-mono" title="타이머 리셋">
-                    <i class="fa-solid fa-rotate-right text-[10px]"></i>
-                </button>
-            </div>
         </div>
     </header>
 
-    <!-- SECTION 1: HERO (인트로 & 레이더 스캔 애니메이션) -->
-    <section id="hero" class="relative min-h-[100dvh] pt-24 pb-16 flex items-center justify-center cyber-grid overflow-hidden border-b border-surfaceBorder">
-        <!-- Ambient Glowing Orbs -->
-        <div class="absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[500px] bg-neonCyan/10 blur-[140px] rounded-full pointer-events-none"></div>
-        <div class="absolute bottom-10 right-10 w-[400px] h-[300px] bg-neonLime/10 blur-[120px] rounded-full pointer-events-none"></div>
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
-            <!-- Left Text Column -->
-            <div class="lg:col-span-7 flex flex-col space-y-6 text-left">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface border border-neonCyan/30 text-neonCyan text-xs font-mono w-fit">
-                    <span class="w-2 h-2 rounded-full bg-neonCyan pulse-active"></span>
-                    <span>arXiv:2411.18013v1 · Autonomous Robotics</span>
-                </div>
-
-                <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.15]">
-                    <span class="font-sync text-transparent bg-clip-text bg-gradient-to-r from-neonCyan via-white to-neonLime">FASIONAD</span><br>
-                    인간처럼 생각하는<br>
-                    자율주행 듀얼 브레인
-                </h1>
-
-                <p class="text-base sm:text-lg text-zinc-400 font-light leading-relaxed max-w-2xl">
-                    <strong class="text-neonLime font-medium">Fast(직관적 반사신경)</strong>와 <strong class="text-neonCyan font-medium">Slow(심층 추론)</strong>가 융합된 차세대 인공지능 주행 시스템. 
-                    기존 자율주행이 풀지 못한 위기 상황의 딜레마를 노벨상 인지 이론으로 해결합니다.
-                </p>
-
-                <!-- Key Metrics Snippet -->
-                <div class="grid grid-cols-3 gap-4 pt-2 max-w-lg">
-                    <div class="bg-surface/80 border border-surfaceBorder p-3.5 rounded-xl">
-                        <div class="text-[11px] font-mono text-zinc-400">nuScenes 충돌률</div>
-                        <div class="text-xl sm:text-2xl font-mono font-bold text-neonLime mt-1">0.18%</div>
-                        <div class="text-[10px] text-zinc-400">업계 최저 수준 달성</div>
-                    </div>
-                    <div class="bg-surface/80 border border-surfaceBorder p-3.5 rounded-xl">
-                        <div class="text-[11px] font-mono text-zinc-400">실시간 처리 속도</div>
-                        <div class="text-xl sm:text-2xl font-mono font-bold text-neonCyan mt-1">6.9+ FPS</div>
-                        <div class="text-[10px] text-zinc-400">단일 RTX 3090 기준</div>
-                    </div>
-                    <div class="bg-surface/80 border border-surfaceBorder p-3.5 rounded-xl">
-                        <div class="text-[11px] font-mono text-zinc-400">CARLA 주행점수</div>
-                        <div class="text-xl sm:text-2xl font-mono font-bold text-white mt-1">64.83%</div>
-                        <div class="text-[10px] text-zinc-400">완주율 89.04%</div>
+    <!-- ── HERO ─────────────────────────── -->
+    <section id="about" class="hero">
+        <div class="container">
+            <div class="hero-inner">
+                <div class="hero-text">
+                    <span class="hero-tag">Network &amp; AI System Engineer</span>
+                    <h1 class="hero-title">안정적인 인프라와<br>지능형 시스템의 융합</h1>
+                    <p class="hero-desc">
+                        데이터가 이동하는 네트워크 계층부터 최상단의 AI 모델(LLM)까지,<br>
+                        전체 아키텍처와 보안을 함께 생각하는 엔지니어 김건희입니다.
+                    </p>
+                    <div class="btn-group">
+                        <a href="mailto:kimsharrrk@naver.com" class="btn btn-primary">합류 제안하기</a>
+                        <a href="https://github.com/Kimsharrrk" target="_blank" class="btn btn-outline">GitHub ↗</a>
                     </div>
                 </div>
-
-                <!-- CTA Action Buttons -->
-                <div class="flex flex-wrap items-center gap-4 pt-4">
-                    <a href="#viewer" class="px-6 py-3 rounded-lg bg-neonCyan text-black font-semibold text-sm hover:bg-white transition-all shadow-[0_0_20px_rgba(0,240,255,0.4)] flex items-center gap-2">
-                        <i class="fa-solid fa-gamepad"></i> 실시간 시나리오 뷰어 체험
-                    </a>
-                    <a href="#architecture" class="px-6 py-3 rounded-lg bg-surface border border-surfaceBorder text-zinc-300 hover:text-white hover:border-zinc-500 font-medium text-sm transition-all flex items-center gap-2">
-                        <i class="fa-solid fa-microchip"></i> 아키텍처 분석
-                    </a>
+                <div class="hero-avatar">
+                    <img src="profile.png" alt="김건희 프로필 사진" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
             </div>
+        </div>
+    </section>
 
-            <!-- Right Radar & HUD Scanner Visual -->
-            <div class="lg:col-span-5 flex items-center justify-center relative">
-                <div class="relative w-[320px] h-[320px] sm:w-[400px] sm:h-[400px] rounded-full border border-surfaceBorder bg-surface/50 p-4 shadow-[0_0_50px_rgba(0,240,255,0.15)]">
-                    <!-- Concentric Range Rings -->
-                    <div class="absolute inset-4 rounded-full border border-neonCyan/20"></div>
-                    <div class="absolute inset-16 rounded-full border border-dashed border-neonCyan/25"></div>
-                    <div class="absolute inset-28 rounded-full border border-neonCyan/30"></div>
-                    <div class="absolute inset-40 rounded-full border border-dashed border-neonCyan/35"></div>
-
-                    <!-- Crosshairs -->
-                    <div class="absolute top-0 bottom-0 left-1/2 w-px bg-neonCyan/20 -translate-x-1/2"></div>
-                    <div class="absolute left-0 right-0 top-1/2 h-px bg-neonCyan/20 -translate-y-1/2"></div>
-
-                    <!-- Rotating Radar Sweep -->
-                    <div class="radar-sweep"></div>
-
-                    <!-- Center Ego Vehicle -->
-                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center">
-                        <div class="w-9 h-14 bg-zinc-900 border-2 border-neonLime rounded-md flex items-center justify-center shadow-[0_0_15px_rgba(204,255,0,0.6)]">
-                            <i class="fa-solid fa-car text-neonLime text-xs"></i>
-                        </div>
-                        <span class="text-[9px] font-mono text-neonLime tracking-wider mt-1">EGO_VEHICLE</span>
+    <!-- ── STACKS ────────────────────────── -->
+    <section id="stacks">
+        <div class="container">
+            <div class="section-label">Tech Stacks</div>
+            <h2 class="section-title" style="text-align:center">사용하는 기술들</h2>
+            <p class="section-desc">주요 기술 스택과 도구들입니다.</p>
+            <div class="stack-grid">
+                <div class="stack-card">
+                    <div class="stack-card-title">Network &amp; Security</div>
+                    <div class="stack-items">
+                        <span class="stack-item"><i class="devicon-linux-plain colored"></i>Linux</span>
+                        <span class="stack-item"><i class="devicon-bash-plain colored"></i>Bash</span>
+                        <span class="stack-item"><i
+                                class="devicon-amazonwebservices-plain-wordmark colored"></i>AWS</span>
+                        <span class="stack-item">TCP/IP</span>
+                        <span class="stack-item">Socket</span>
+                        <span class="stack-item">Wireshark</span>
                     </div>
-
-                    <!-- Dynamic Radar Target Blips -->
-                    <div class="absolute top-24 left-24 w-3 h-3 rounded-full bg-neonRed pulse-active flex items-center justify-center">
-                        <span class="text-[8px] font-mono text-neonRed absolute -top-4 whitespace-nowrap">BUS_01 [STATIC]</span>
-                    </div>
-                    <div class="absolute bottom-28 right-24 w-2.5 h-2.5 rounded-full bg-neonCyan pulse-active flex items-center justify-center">
-                        <span class="text-[8px] font-mono text-neonCyan absolute -bottom-4 whitespace-nowrap">ONCOMING_CAR</span>
-                    </div>
-                    <div class="absolute top-28 right-28 w-2 h-2 rounded-full bg-yellow-400 pulse-active flex items-center justify-center">
-                        <span class="text-[8px] font-mono text-yellow-400 absolute -top-4 whitespace-nowrap">PEDESTRIAN</span>
-                    </div>
-
-                    <!-- Live Telemetry Corner Overlays -->
-                    <div class="absolute top-3 left-4 text-[10px] font-mono text-zinc-400">
-                        RANGE: <span class="text-neonCyan">100m</span><br>
-                        BEV_GRID: <span class="text-zinc-300">200x200</span>
-                    </div>
-                    <div class="absolute bottom-3 right-4 text-[10px] font-mono text-right text-zinc-400">
-                        MODE: <span class="text-neonLime">DUAL_FUSION</span><br>
-                        FREQ: <span class="text-zinc-300">30Hz / 1Hz</span>
+                </div>
+                <div class="stack-card">
+                    <div class="stack-card-title">AI &amp; Development</div>
+                    <div class="stack-items">
+                        <span class="stack-item"><i class="devicon-python-plain colored"></i>Python</span>
+                        <span class="stack-item"><i class="devicon-cplusplus-plain colored"></i>C++</span>
+                        <span class="stack-item"><i class="devicon-typescript-plain colored"></i>TypeScript</span>
+                        <span class="stack-item"><i class="devicon-swift-plain colored"></i>Swift</span>
+                        <span class="stack-item">OpenAI API</span>
+                        <span class="stack-item">LLM</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SECTION 2: PROBLEM (기존 자율주행의 딜레마) -->
-    <section id="problem" class="py-24 border-b border-surfaceBorder bg-surface/30">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <div class="inline-block text-xs font-mono text-neonRed uppercase tracking-widest mb-3">01 · The Critical Dilemma</div>
-                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-white">
-                    왜 기존 자율주행은 비 오는 날 골목길에서 멈칫할까?
-                </h2>
-                <p class="text-zinc-400 text-sm sm:text-base mt-4 leading-relaxed">
-                    현재 모빌리티 업계는 두 가지 극단적인 방식 사이에서 깊은 딜레마에 빠져 있습니다.
-                    하나는 너무 급하고, 다른 하나는 너무 느립니다.
-                </p>
-            </div>
+    <!-- ── PROJECTS ──────────────────────── -->
+    <section id="projects">
+        <div class="section-label">Projects</div>
+        <h2 class="section-title">현재까지 개발한 프로젝트입니다.</h2>
+        <p class="section-desc">프로젝트를 클릭하면 자세히 볼 수 있습니다.</p>
 
-            <!-- Two Opposing Columns + Center Callout -->
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-                <!-- Left: E2E Model (Fast but Brittle) -->
-                <div class="lg:col-span-5 bg-surface border border-surfaceBorder hover:border-neonRed/50 transition-all rounded-2xl p-7 flex flex-col justify-between">
-                    <div>
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="px-3 py-1 rounded bg-neonRed/10 text-neonRed text-xs font-mono font-bold border border-neonRed/30">
-                                <i class="fa-solid fa-bolt mr-1"></i> 순수 E2E 신경망 (기존 방식)
-                            </span>
-                            <span class="text-xs font-mono text-zinc-400">초고속 30ms</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-white mb-2">빠르지만, 돌발 상황에서 멍청해진다</h3>
-                        <p class="text-xs sm:text-sm text-zinc-400 leading-relaxed mb-6">
-                            센서 영상을 입력받아 곧바로 핸들/페달 명령을 출력하는 방식. 일상 주행에서는 사람처럼 매끄럽지만, 데이터셋에 없던 공사 현장이나 경찰관 수신호 같은 <strong>'롱테일(Long-tail) 엣지 케이스'</strong>를 만나면 완전히 길을 잃습니다.
-                        </p>
+        <div class="carousel-outer">
+            <div class="carousel-track" id="project-track">
 
-                        <!-- Pros & Cons List -->
-                        <div class="space-y-2.5 text-xs font-mono">
-                            <div class="flex items-center gap-2 text-zinc-300">
-                                <i class="fa-solid fa-check text-neonLime"></i>
-                                <span>장점: 30ms 이내 실시간 조향 반응 (실시간성 충족)</span>
-                            </div>
-                            <div class="flex items-center gap-2 text-zinc-300">
-                                <i class="fa-solid fa-xmark text-neonRed"></i>
-                                <span>치명적 한계: 블랙박스 구조로 인과관계 추론 불가능</span>
-                            </div>
-                            <div class="flex items-center gap-2 text-zinc-300">
-                                <i class="fa-solid fa-triangle-exclamation text-yellow-400"></i>
-                                <span>위험: 낯선 도로 환경에서 에러 누적으로 인한 급정거/사고</span>
-                            </div>
-                        </div>
+                <!-- P0: FASIONAD -->
+                <div class="project-card">
+                    <div class="project-thumb" style="background: linear-gradient(135deg, #08090d 0%, #1e2235 50%, #00f0ff 100%);">
+                        <span style="color:#00f0ff; font-weight:800; font-size:1.1rem; text-align:center; padding: 8px; font-family:'JetBrains Mono',monospace;">FASIONAD<br><span style="color:#ccff00; font-size:0.75rem;">DUAL-BRAIN AI</span></span>
                     </div>
-
-                    <div class="mt-8 pt-4 border-t border-surfaceBorder flex items-center justify-between text-xs font-mono text-zinc-400">
-                        <span>대표 사례: VAD, GenAD 기본형</span>
-                        <span class="text-neonRed font-bold">충돌률 0.53% 수준</span>
+                    <div class="project-body">
+                        <div class="project-meta-row">
+                            <span class="project-period">2026.09 · 미래첨단기술과이해I</span>
+                            <div class="project-links">
+                                <a class="project-link" href="./fasionad/" target="_blank">연구 발표 보기 →</a>
+                            </div>
+                        </div>
+                        <div class="project-name">FASIONAD : 자율주행 듀얼 브레인 AI</div>
+                        <div class="project-desc">Fast(직관적 반사신경)와 Slow(VLM 심층 추론)가 융합된 차세대 자율주행 시스템 인터랙티브 프레젠테이션.</div>
+                        <div class="project-tags">
+                            <span class="project-tag">Autonomous Driving</span>
+                            <span class="project-tag">Dual-System AI</span>
+                            <span class="project-tag">VLM</span>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Center Bridge Callout -->
-                <div class="lg:col-span-2 flex flex-col items-center justify-center text-center p-4 bg-gradient-to-b from-surface/80 via-zinc-900/60 to-surface/80 rounded-2xl border border-surfaceBorder relative">
-                    <div class="w-12 h-12 rounded-full bg-neonLime/10 border border-neonLime/40 flex items-center justify-center text-neonLime mb-4 shadow-[0_0_20px_rgba(204,255,0,0.3)]">
-                        <i class="fa-solid fa-brain text-lg"></i>
-                    </div>
-                    <span class="text-xs font-mono text-neonLime font-bold mb-2">핵심 물음</span>
-                    <p class="text-xs text-zinc-300 leading-relaxed font-medium">
-                        "인간은 평소엔 직관으로, 위기 땐 이성으로 운전한다.<br>
-                        <span class="text-neonCyan font-bold">이 둘을 합칠 수는 없을까?</span>"
-                    </p>
-                    <div class="mt-4 text-[11px] font-mono text-zinc-400">
-                        대니얼 카너먼<br>이중 사고 이론 착안
+                <!-- P1 -->
+                <div class="project-card">
+                    <div class="project-thumb">Thumbnail</div>
+                    <div class="project-body">
+                        <div class="project-meta-row">
+                            <span class="project-period">2026.03 – 2026.06 · 개인 프로젝트</span>
+                            <div class="project-links">
+                                <a class="project-link" href="#">자세히 보기 →</a>
+                            </div>
+                        </div>
+                        <div class="project-name">LLM 기반 네트워크 이상 탐지 봇</div>
+                        <div class="project-desc">서버 로그와 패킷을 실시간으로 분석하여 비정상적인 트래픽이나 침입 시도를 식별하는 보안 파이프라인 프로토타입입니다.</div>
+                        <div class="project-tags">
+                            <span class="project-tag">Python</span>
+                            <span class="project-tag">OpenAI API</span>
+                            <span class="project-tag">Network Security</span>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Right: LLM/VLM Model (Smart but Too Slow) -->
-                <div class="lg:col-span-5 bg-surface border border-surfaceBorder hover:border-neonCyan/50 transition-all rounded-2xl p-7 flex flex-col justify-between">
-                    <div>
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="px-3 py-1 rounded bg-neonCyan/10 text-neonCyan text-xs font-mono font-bold border border-neonCyan/30">
-                                <i class="fa-solid fa-comment-nodes mr-1"></i> 순수 VLM / LLM 주행
-                            </span>
-                            <span class="text-xs font-mono text-zinc-400">초저속 1,000~2,000ms</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-white mb-2">똑똑하지만, 너무 느려서 사고가 난다</h3>
-                        <p class="text-xs sm:text-sm text-zinc-400 leading-relaxed mb-6">
-                            카메라 영상을 거대 멀티모달 모델이 맥락 단위로 언어 추론하는 방식. "공사 중이므로 우회해야 한다"는 논리 판단은 완벽하지만, 거대한 파라미터 연산 때문에 <strong>응답까지 1~2초가 소요</strong>됩니다.
-                        </p>
-
-                        <!-- Pros & Cons List -->
-                        <div class="space-y-2.5 text-xs font-mono">
-                            <div class="flex items-center gap-2 text-zinc-300">
-                                <i class="fa-solid fa-check text-neonLime"></i>
-                                <span>장점: 뛰어난 환경 이해 및 이유를 설명하는 능력 (XAI)</span>
-                            </div>
-                            <div class="flex items-center gap-2 text-zinc-300">
-                                <i class="fa-solid fa-xmark text-neonRed"></i>
-                                <span>치명적 한계: 시속 60km에서 1초면 차량은 16.7m를 질주함</span>
-                            </div>
-                            <div class="flex items-center gap-2 text-zinc-300">
-                                <i class="fa-solid fa-triangle-exclamation text-yellow-400"></i>
-                                <span>위험: 실시간 돌발 장애물 회피 불가능으로 단독 적용 불가</span>
+                <!-- P2 -->
+                <div class="project-card">
+                    <div class="project-thumb">Thumbnail</div>
+                    <div class="project-body">
+                        <div class="project-meta-row">
+                            <span class="project-period">2026.09 – 진행 중 · Academic</span>
+                            <div class="project-links">
+                                <a class="project-link" href="#">자세히 보기 →</a>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="mt-8 pt-4 border-t border-surfaceBorder flex items-center justify-between text-xs font-mono text-zinc-400">
-                        <span>대표 사례: DriveLM, GPT-Driver</span>
-                        <span class="text-neonCyan font-bold">실시간 주행 제어 불가</span>
+                        <div class="project-name">Secure P2P Chat Protocol</div>
+                        <div class="project-desc">중앙 서버 없이 클라이언트 간 직접 연결로 통신하는 초경량 P2P 채팅 앱. AES-256 종단간 암호화(E2EE) 적용.
+                        </div>
+                        <div class="project-tags">
+                            <span class="project-tag">C++</span>
+                            <span class="project-tag">Socket</span>
+                            <span class="project-tag">AES-256</span>
+                        </div>
                     </div>
                 </div>
+
+                <!-- P3 -->
+                <div class="project-card">
+                    <div class="project-thumb">Thumbnail</div>
+                    <div class="project-body">
+                        <div class="project-meta-row">
+                            <span class="project-period">Personal Project</span>
+                            <div class="project-links">
+                                <a class="project-link" href="https://github.com/Kimsharrrk/monster-typing-pretext"
+                                    target="_blank">GitHub ↗</a>
+                            </div>
+                        </div>
+                        <div class="project-name">Monster Typing Pretext</div>
+                        <div class="project-desc">TypeScript 기반 타자 연습 게임 웹 애플리케이션. 입력과 화면 업데이트 간 지연을 최소화한 인터랙션 구현.</div>
+                        <div class="project-tags">
+                            <span class="project-tag">TypeScript</span>
+                            <span class="project-tag">Web Frontend</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- P4 -->
+                <div class="project-card">
+                    <div class="project-thumb">Thumbnail</div>
+                    <div class="project-body">
+                        <div class="project-meta-row">
+                            <span class="project-period">Personal Project</span>
+                            <div class="project-links">
+                                <a class="project-link" href="https://github.com/Kimsharrrk/SidecarSnap"
+                                    target="_blank">GitHub ↗</a>
+                            </div>
+                        </div>
+                        <div class="project-name">SidecarSnap</div>
+                        <div class="project-desc">Swift로 개발한 Apple 네이티브 유틸리티 앱. 시스템 레벨에서 사용자 편의성 향상 기능 연동.</div>
+                        <div class="project-tags">
+                            <span class="project-tag">Swift</span>
+                            <span class="project-tag">Apple Native</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- P5 -->
+                <div class="project-card">
+                    <div class="project-thumb">Thumbnail</div>
+                    <div class="project-body">
+                        <div class="project-meta-row">
+                            <span class="project-period">Personal Project</span>
+                            <div class="project-links">
+                                <a class="project-link" href="https://github.com/Kimsharrrk/globe-pretext"
+                                    target="_blank">GitHub ↗</a>
+                            </div>
+                        </div>
+                        <div class="project-name">Globe Pretext</div>
+                        <div class="project-desc">3D 지구본 렌더링 시각화 프로젝트. TypeScript로 좌표 데이터를 인터랙티브하게 브라우저에 매핑.</div>
+                        <div class="project-tags">
+                            <span class="project-tag">TypeScript</span>
+                            <span class="project-tag">3D Visualization</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- P6 -->
+                <div class="project-card">
+                    <div class="project-thumb">Thumbnail</div>
+                    <div class="project-body">
+                        <div class="project-meta-row">
+                            <span class="project-period">Personal Project</span>
+                            <div class="project-links">
+                                <a class="project-link" href="https://github.com/Kimsharrrk/interactive-portfolio"
+                                    target="_blank">GitHub ↗</a>
+                            </div>
+                        </div>
+                        <div class="project-name">Interactive Portfolio</div>
+                        <div class="project-desc">사용자와 상호작용하는 인터랙티브 웹 포트폴리오. GSAP 기반 스크롤 애니메이션과 세련된 UI.</div>
+                        <div class="project-tags">
+                            <span class="project-tag">HTML/CSS</span>
+                            <span class="project-tag">JavaScript</span>
+                            <span class="project-tag">GSAP</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DUPLICATE for seamless loop -->
+                <!-- P1 dup -->
+                <div class="project-card">
+                    <div class="project-thumb">Thumbnail</div>
+                    <div class="project-body">
+                        <div class="project-meta-row">
+                            <span class="project-period">2026.03 – 2026.06 · 개인 프로젝트</span>
+                            <div class="project-links"><a class="project-link" href="#">자세히 보기 →</a></div>
+                        </div>
+                        <div class="project-name">LLM 기반 네트워크 이상 탐지 봇</div>
+                        <div class="project-desc">서버 로그와 패킷을 실시간으로 분석하여 비정상적인 트래픽이나 침입 시도를 식별하는 보안 파이프라인 프로토타입입니다.</div>
+                        <div class="project-tags"><span class="project-tag">Python</span><span
+                                class="project-tag">OpenAI API</span><span class="project-tag">Network Security</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- P2 dup -->
+                <div class="project-card">
+                    <div class="project-thumb">Thumbnail</div>
+                    <div class="project-body">
+                        <div class="project-meta-row">
+                            <span class="project-period">2026.09 – 진행 중 · Academic</span>
+                            <div class="project-links"><a class="project-link" href="#">자세히 보기 →</a></div>
+                        </div>
+                        <div class="project-name">Secure P2P Chat Protocol</div>
+                        <div class="project-desc">중앙 서버 없이 클라이언트 간 직접 연결로 통신하는 초경량 P2P 채팅 앱. AES-256 종단간 암호화(E2EE) 적용.
+                        </div>
+                        <div class="project-tags"><span class="project-tag">C++</span><span
+                                class="project-tag">Socket</span><span class="project-tag">AES-256</span></div>
+                    </div>
+                </div>
+                <!-- P3 dup -->
+                <div class="project-card">
+                    <div class="project-thumb">Thumbnail</div>
+                    <div class="project-body">
+                        <div class="project-meta-row">
+                            <span class="project-period">Personal Project</span>
+                            <div class="project-links"><a class="project-link"
+                                    href="https://github.com/Kimsharrrk/monster-typing-pretext" target="_blank">GitHub
+                                    ↗</a></div>
+                        </div>
+                        <div class="project-name">Monster Typing Pretext</div>
+                        <div class="project-desc">TypeScript 기반 타자 연습 게임 웹 애플리케이션. 입력과 화면 업데이트 간 지연을 최소화한 인터랙션 구현.</div>
+                        <div class="project-tags"><span class="project-tag">TypeScript</span><span
+                                class="project-tag">Web Frontend</span></div>
+                    </div>
+                </div>
+                <!-- P4 dup -->
+                <div class="project-card">
+                    <div class="project-thumb">Thumbnail</div>
+                    <div class="project-body">
+                        <div class="project-meta-row">
+                            <span class="project-period">Personal Project</span>
+                            <div class="project-links"><a class="project-link"
+                                    href="https://github.com/Kimsharrrk/SidecarSnap" target="_blank">GitHub ↗</a></div>
+                        </div>
+                        <div class="project-name">SidecarSnap</div>
+                        <div class="project-desc">Swift로 개발한 Apple 네이티브 유틸리티 앱. 시스템 레벨에서 사용자 편의성 향상 기능 연동.</div>
+                        <div class="project-tags"><span class="project-tag">Swift</span><span class="project-tag">Apple
+                                Native</span></div>
+                    </div>
+                </div>
+                <!-- P5 dup -->
+                <div class="project-card">
+                    <div class="project-thumb">Thumbnail</div>
+                    <div class="project-body">
+                        <div class="project-meta-row">
+                            <span class="project-period">Personal Project</span>
+                            <div class="project-links"><a class="project-link"
+                                    href="https://github.com/Kimsharrrk/globe-pretext" target="_blank">GitHub ↗</a>
+                            </div>
+                        </div>
+                        <div class="project-name">Globe Pretext</div>
+                        <div class="project-desc">3D 지구본 렌더링 시각화 프로젝트. TypeScript로 좌표 데이터를 인터랙티브하게 브라우저에 매핑.</div>
+                        <div class="project-tags"><span class="project-tag">TypeScript</span><span
+                                class="project-tag">3D Visualization</span></div>
+                    </div>
+                </div>
+                <!-- P6 dup -->
+                <div class="project-card">
+                    <div class="project-thumb">Thumbnail</div>
+                    <div class="project-body">
+                        <div class="project-meta-row">
+                            <span class="project-period">Personal Project</span>
+                            <div class="project-links"><a class="project-link"
+                                    href="https://github.com/Kimsharrrk/interactive-portfolio" target="_blank">GitHub
+                                    ↗</a></div>
+                        </div>
+                        <div class="project-name">Interactive Portfolio</div>
+                        <div class="project-desc">사용자와 상호작용하는 인터랙티브 웹 포트폴리오. GSAP 기반 스크롤 애니메이션과 세련된 UI.</div>
+                        <div class="project-tags"><span class="project-tag">HTML/CSS</span><span
+                                class="project-tag">JavaScript</span><span class="project-tag">GSAP</span></div>
+                    </div>
+                </div>
+
+            </div><!-- /carousel-track -->
+        </div><!-- /carousel-outer -->
+    </section>
+
+    <!-- ── ACTIVITIES ─────────────────────── -->
+    <section id="activities">
+        <div class="section-label">Activities &amp; Awards</div>
+        <h2 class="section-title" style="text-align:center">대회 및 활동</h2>
+        <p class="section-desc">참여한 해커톤, 대회, 활동 이력입니다.</p>
+
+        <div class="carousel-outer">
+            <div class="carousel-track" id="activity-track" style="animation-duration: 35s;">
+
+                <!-- A1 -->
+                <div class="project-card">
+                    <div class="project-thumb" style="background: linear-gradient(135deg, #d50000 0%, #ff6f00 100%);">
+                        <span style="color:#fff; font-weight:800; font-size:1.5rem;">LG</span>
+                    </div>
+                    <div class="project-body">
+                        <div class="project-meta-row">
+                            <span class="project-period">2026.06 – 2026.09</span>
+                        </div>
+                        <div class="project-name">LG Aimers 9기 (AI 연구·R&D)</div>
+                        <div class="project-desc">LG경영개발원 AI연구원 주관 청년 일경험 지원사업. AI Workflow 및 실무 R&D 역량 강화.</div>
+                        <div class="project-tags"><span class="project-tag">LG AI Research</span><span
+                                class="project-tag">AI R&D</span></div>
+                    </div>
+                </div>
+
+                <!-- A2 -->
+                <div class="project-card">
+                    <div class="project-thumb" style="background: linear-gradient(135deg, #6c47ff 0%, #a78bfa 100%);">
+                        <span style="color:#fff; font-weight:800; font-size:1.2rem;">Upstage</span>
+                    </div>
+                    <div class="project-body">
+                        <div class="project-meta-row">
+                            <span class="project-period">2026</span>
+                        </div>
+                        <div class="project-name">2026 CNU × Upstage AI Workflow Workshop</div>
+                        <div class="project-desc">충남대 & 업스테이지 공동 주관 AI 워크플로우 해커톤/워크샵 참여.</div>
+                        <div class="project-tags"><span class="project-tag">Upstage</span><span class="project-tag">AI
+                                Workflow</span></div>
+                    </div>
+                </div>
+
+                <!-- A3 -->
+                <div class="project-card">
+                    <div class="project-thumb" style="background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);">
+                        <span
+                            style="color:#fff; font-weight:800; font-size:1rem; text-align:center; padding: 8px;">AI·SW<br>경진대회</span>
+                    </div>
+                    <div class="project-body">
+                        <div class="project-meta-row">
+                            <span class="project-period">2026</span>
+                        </div>
+                        <div class="project-name">AI·SW 중심대학 디지털 경진대회 (AI부문)</div>
+                        <div class="project-desc">AI 기술 활용 서비스 기획 및 구현 능력을 검증받으며 실전 프로젝트 경험을 쌓았습니다.</div>
+                        <div class="project-tags"><span class="project-tag">AI Competition</span><span
+                                class="project-tag">Hackathon</span></div>
+                    </div>
+                </div>
+
+                <!-- A4 -->
+                <div class="project-card">
+                    <div class="project-thumb" style="background: linear-gradient(135deg, #064e3b 0%, #10b981 100%);">
+                        <span style="color:#fff; font-weight:800; font-size:1.5rem;">NYPC</span>
+                    </div>
+                    <div class="project-body">
+                        <div class="project-meta-row">
+                            <span class="project-period">Past</span>
+                        </div>
+                        <div class="project-name">NYPC (Nexon Youth Programming Challenge)</div>
+                        <div class="project-desc">넥슨 주최 청소년 프로그래밍 대회 참가. 알고리즘 설계 및 논리적 문제 해결 능력 강화.</div>
+                        <div class="project-tags"><span class="project-tag">Algorithm</span><span
+                                class="project-tag">Problem Solving</span></div>
+                    </div>
+                </div>
+
+                <!-- DUPLICATE for seamless loop -->
+                <div class="project-card">
+                    <div class="project-thumb" style="background: linear-gradient(135deg, #d50000 0%, #ff6f00 100%);">
+                        <span style="color:#fff; font-weight:800; font-size:1.5rem;">LG</span>
+                    </div>
+                    <div class="project-body">
+                        <div class="project-meta-row"><span class="project-period">2026.06 – 2026.09</span></div>
+                        <div class="project-name">LG Aimers 9기 (AI 연구·R&D)</div>
+                        <div class="project-desc">LG경영개발원 AI연구원 주관 청년 일경험 지원사업. AI Workflow 및 실무 R&D 역량 강화.</div>
+                        <div class="project-tags"><span class="project-tag">LG AI Research</span><span
+                                class="project-tag">AI R&D</span></div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-thumb" style="background: linear-gradient(135deg, #6c47ff 0%, #a78bfa 100%);">
+                        <span style="color:#fff; font-weight:800; font-size:1.2rem;">Upstage</span>
+                    </div>
+                    <div class="project-body">
+                        <div class="project-meta-row"><span class="project-period">2026</span></div>
+                        <div class="project-name">2026 CNU × Upstage AI Workflow Workshop</div>
+                        <div class="project-desc">충남대 & 업스테이지 공동 주관 AI 워크플로우 해커톤/워크샵 참여.</div>
+                        <div class="project-tags"><span class="project-tag">Upstage</span><span class="project-tag">AI
+                                Workflow</span></div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-thumb" style="background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);">
+                        <span
+                            style="color:#fff; font-weight:800; font-size:1rem; text-align:center; padding: 8px;">AI·SW<br>경진대회</span>
+                    </div>
+                    <div class="project-body">
+                        <div class="project-meta-row"><span class="project-period">2026</span></div>
+                        <div class="project-name">AI·SW 중심대학 디지털 경진대회 (AI부문)</div>
+                        <div class="project-desc">AI 기술 활용 서비스 기획 및 구현 능력을 검증받으며 실전 프로젝트 경험.</div>
+                        <div class="project-tags"><span class="project-tag">AI Competition</span><span
+                                class="project-tag">Hackathon</span></div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-thumb" style="background: linear-gradient(135deg, #064e3b 0%, #10b981 100%);">
+                        <span style="color:#fff; font-weight:800; font-size:1.5rem;">NYPC</span>
+                    </div>
+                    <div class="project-body">
+                        <div class="project-meta-row"><span class="project-period">Past</span></div>
+                        <div class="project-name">NYPC (Nexon Youth Programming Challenge)</div>
+                        <div class="project-desc">넥슨 주최 청소년 프로그래밍 대회 참가. 알고리즘 및 논리적 문제 해결 능력 강화.</div>
+                        <div class="project-tags"><span class="project-tag">Algorithm</span><span
+                                class="project-tag">Problem Solving</span></div>
+                    </div>
+                </div>
+
+            </div><!-- /carousel-track -->
+        </div><!-- /carousel-outer -->
+    </section>
+
+    <!-- ── BACKGROUND / EDUCATION ────────── -->
+    <section id="background">
+        <div class="container">
+            <div class="section-label">Background</div>
+            <h2 class="section-title" style="text-align:center">교육 및 어학</h2>
+
+            <div class="edu-section">
+
+                <div class="edu-category-label">교육</div>
+
+                <div class="edu-row">
+                    <div class="edu-period">재학 중</div>
+                    <div class="edu-content">
+                        <div class="edu-title">공주대학교 소프트웨어학과</div>
+                        <div class="edu-sub">소프트웨어학과</div>
+                        <ul class="edu-bullets">
+                            <li>네트워크 보안, 운영체제, 자료구조, 알고리즘 등 CS 기초 학습</li>
+                            <li>LLM 및 AI 시스템 통합 실습 과목 이수</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="edu-row">
+                    <div class="edu-period">수강 중</div>
+                    <div class="edu-content">
+                        <div class="edu-title">미래첨단기술과 이해 I</div>
+                        <div class="edu-sub">교양 과정</div>
+                        <ul class="edu-bullets">
+                            <li>AI, 블록체인, IoT 등 첨단 기술 트렌드 이해</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <hr class="edu-divider">
+
+                <div class="edu-category-label">자격 및 대회</div>
+
+                <div class="edu-row">
+                    <div class="edu-period">2026</div>
+                    <div class="edu-content">
+                        <div class="edu-title">LG Aimers 9기 수료</div>
+                        <div class="edu-sub">AI 연구·R&D 과정</div>
+                    </div>
+                </div>
+
+                <div class="edu-row">
+                    <div class="edu-period">2026</div>
+                    <div class="edu-content">
+                        <div class="edu-title">CNU × Upstage AI Workflow Workshop</div>
+                        <div class="edu-sub">수료증 취득</div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <!-- SECTION 3: SOLUTION (FASIONAD 아키텍처) -->
-    <section id="architecture" class="py-24 border-b border-surfaceBorder relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <div class="inline-block text-xs font-mono text-neonCyan uppercase tracking-widest mb-3">02 · The Solution Architecture</div>
-                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-white">
-                    FASIONAD : 두 개의 경로와 지능형 스위칭
-                </h2>
-                <p class="text-zinc-400 text-sm sm:text-base mt-4 leading-relaxed">
-                    평상시에는 가벼운 Fast 경로로 고속 주행하고, 위험이나 불확실성이 감지되는 순간에만 Slow VLM 경로를 호출하여 궤적을 실시간 교정합니다.
-                </p>
+    <!-- ── GITHUB REPOS ───────────────────── -->
+    <section id="github">
+        <div class="container">
+            <div class="section-label">GitHub 저장소</div>
+            <h2 class="section-title" style="text-align:center">GitHub 저장소</h2>
+            <p class="section-desc">GitHub API로 실시간으로 불러오며, 최근에 만든 저장소부터 보여줍니다.</p>
+
+            <div class="github-filter" id="github-filters">
+                <button class="filter-btn active" id="filter-all">전체</button>
             </div>
-
-            <!-- Architecture Three Core Pillars -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Pillar 1: Fast Pathway -->
-                <div class="bg-surface border border-surfaceBorder rounded-2xl p-7 relative overflow-hidden group hover:border-neonLime/50 transition-all">
-                    <div class="absolute top-0 right-0 w-24 h-24 bg-neonLime/5 rounded-bl-full pointer-events-none"></div>
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-10 h-10 rounded-xl bg-neonLime/10 border border-neonLime/30 flex items-center justify-center text-neonLime">
-                            <i class="fa-solid fa-gauge-high"></i>
-                        </div>
-                        <div>
-                            <span class="text-xs font-mono text-neonLime font-bold block">FAST PATHWAY</span>
-                            <span class="text-xs text-zinc-400">직관적 궤적 생성기</span>
-                        </div>
-                    </div>
-                    <h3 class="text-lg font-bold text-white mb-3">초당 6.9+ 회 궤적 생성</h3>
-                    <p class="text-xs sm:text-sm text-zinc-400 leading-relaxed mb-5">
-                        Multi-view 카메라에서 BEV(Bird's Eye View) 피처를 추출하고, Ego/Agent/Map 인스턴스 토큰 간의 Attention 연산으로 후보 궤적군을 초고속 샘플링합니다.
-                    </p>
-                    <div class="bg-bg/70 rounded-lg p-3 font-mono text-[11px] text-zinc-300 border border-surfaceBorder space-y-1">
-                        <div class="text-neonLime font-semibold">수식 (1): (It, Ct) → Wt</div>
-                        <div class="text-zinc-400">다중 보상 모델 (안전, 편안함, 효율, 연비) 평가</div>
-                        <div class="text-zinc-500">F_Reward = α_s*C_s + α_c*C_c + α_e*C_e</div>
-                    </div>
-                </div>
-
-                <!-- Pillar 2: Laplace Uncertainty Estimator -->
-                <div class="bg-surface border border-surfaceBorder rounded-2xl p-7 relative overflow-hidden group hover:border-yellow-400/50 transition-all">
-                    <div class="absolute top-0 right-0 w-24 h-24 bg-yellow-400/5 rounded-bl-full pointer-events-none"></div>
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-10 h-10 rounded-xl bg-yellow-400/10 border border-yellow-400/30 flex items-center justify-center text-yellow-400">
-                            <i class="fa-solid fa-scale-balanced"></i>
-                        </div>
-                        <div>
-                            <span class="text-xs font-mono text-yellow-400 font-bold block">SWITCH MECHANISM</span>
-                            <span class="text-xs text-zinc-400">라플라스 불확실성 감지</span>
-                        </div>
-                    </div>
-                    <h3 class="text-lg font-bold text-white mb-3">이상치에 강한 위험 판단</h3>
-                    <p class="text-xs sm:text-sm text-zinc-400 leading-relaxed mb-5">
-                        가우시안보다 꼬리가 두꺼운(Heavy-tailed) <strong>라플라스 분포(Laplace Distribution)</strong>를 활용해 주행 보상의 오차와 불확실성을 정밀 계산합니다.
-                    </p>
-                    <div class="bg-bg/70 rounded-lg p-3 font-mono text-[11px] text-zinc-300 border border-surfaceBorder space-y-1">
-                        <div class="text-yellow-400 font-semibold">수식 (8): p(Reward|Θ)</div>
-                        <div class="text-zinc-400">불확실성 임계값 초과 시 즉시 Slow 호출</div>
-                        <div class="text-zinc-500">Uncertainty > Threshold → Wake Up Slow!</div>
-                    </div>
-                </div>
-
-                <!-- Pillar 3: Slow Pathway & Information Bottleneck -->
-                <div class="bg-surface border border-surfaceBorder rounded-2xl p-7 relative overflow-hidden group hover:border-neonCyan/50 transition-all">
-                    <div class="absolute top-0 right-0 w-24 h-24 bg-neonCyan/5 rounded-bl-full pointer-events-none"></div>
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-10 h-10 rounded-xl bg-neonCyan/10 border border-neonCyan/30 flex items-center justify-center text-neonCyan">
-                            <i class="fa-solid fa-microchip"></i>
-                        </div>
-                        <div>
-                            <span class="text-xs font-mono text-neonCyan font-bold block">SLOW PATHWAY</span>
-                            <span class="text-xs text-zinc-400">VLM 맥락 분석 & 피드백</span>
-                        </div>
-                    </div>
-                    <h3 class="text-lg font-bold text-white mb-3">노이즈 제거와 고차원 판단</h3>
-                    <p class="text-xs sm:text-sm text-zinc-400 leading-relaxed mb-5">
-                        Visual 및 BEV 프롬프트를 Qwen-VL에 입력하여 환경 상태(Pt)와 메타 액션(At)을 도출합니다. <strong>정보 병목(Information Bottleneck)</strong>으로 환각을 걸러냅니다.
-                    </p>
-                    <div class="bg-bg/70 rounded-lg p-3 font-mono text-[11px] text-zinc-300 border border-surfaceBorder space-y-1">
-                        <div class="text-neonCyan font-semibold">출력: Pt=[1,1,0,...], At=[Stop, Yield]</div>
-                        <div class="text-zinc-400">Ego Token과 Cross-Attention으로 융합</div>
-                        <div class="text-zinc-500">L_align = ||Pt - P_hat||^2 + ||At - A_hat||^2</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Visual Flowchart Diagram -->
-            <div class="mt-12 bg-surface/70 border border-surfaceBorder rounded-2xl p-6 lg:p-8">
-                <div class="text-xs font-mono text-zinc-400 mb-6 flex items-center gap-2">
-                    <i class="fa-solid fa-diagram-project text-neonCyan"></i>
-                    <span>FASIONAD DUAL-LOOP DATAFLOW (논문 Figure 2 기반 요약)</span>
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-5 gap-4 items-center text-center text-xs font-mono">
-                    <div class="bg-bg border border-surfaceBorder p-4 rounded-xl">
-                        <div class="text-zinc-400 mb-1">입력 데이터</div>
-                        <div class="text-white font-bold">Multi-View 카메라<br>+ BEV 토큰</div>
-                    </div>
-                    <div class="text-zinc-500 hidden md:block"><i class="fa-solid fa-arrow-right text-base text-neonLime"></i></div>
-                    
-                    <div class="bg-bg border border-neonLime/40 p-4 rounded-xl">
-                        <div class="text-neonLime font-bold mb-1">Fast Pathway</div>
-                        <div class="text-white">다중 궤적 생성<br>& 보상 모델 채점</div>
-                    </div>
-                    <div class="text-zinc-500 hidden md:block"><i class="fa-solid fa-arrow-right text-base text-yellow-400"></i></div>
-                    
-                    <div class="bg-bg border border-yellow-400/40 p-4 rounded-xl">
-                        <div class="text-yellow-400 font-bold mb-1">라플라스 불확실성</div>
-                        <div class="text-white">위험도 판별 &<br>스위칭 조건 검사</div>
-                    </div>
-                </div>
-
-                <div class="mt-6 pt-6 border-t border-surfaceBorder grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-mono">
-                    <div class="p-3 bg-neonLime/5 border border-neonLime/20 rounded-lg flex items-center justify-between">
-                        <span class="text-zinc-300">경로 A: 보상 높음 & 불확실성 낮음</span>
-                        <span class="text-neonLime font-bold">즉시 Fast 궤적으로 실행 (30ms 지연 없음)</span>
-                    </div>
-                    <div class="p-3 bg-neonCyan/5 border border-neonCyan/20 rounded-lg flex items-center justify-between">
-                        <span class="text-zinc-300">경로 B: 불확실성 높음 (이상치 발생)</span>
-                        <span class="text-neonCyan font-bold">Slow VLM 호출 → 메타 액션 피드백 주입 후 궤적 보정</span>
-                    </div>
-                </div>
+            <div class="repo-grid" id="repo-grid">
+                <p class="repo-loading">불러오는 중...</p>
             </div>
         </div>
     </section>
 
-    <!-- SECTION 4: LIVE SCENARIO VIEWER (하이라이트 인터랙션) -->
-    <section id="viewer" class="py-24 border-b border-surfaceBorder bg-gradient-to-b from-surface/20 via-bg to-surface/20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-                <div>
-                    <div class="inline-flex items-center gap-2 text-xs font-mono text-neonLime uppercase tracking-widest mb-3">
-                        <span class="w-2 h-2 rounded-full bg-neonLime pulse-active"></span>
-                        03 · Live Interactive Simulator
-                    </div>
-                    <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-white">
-                        논문 검증 3대 주행 시나리오 뷰어
-                    </h2>
-                    <p class="text-zinc-400 text-sm mt-2">
-                        실제 논문(Figure 4 & 6)에서 성능을 입증한 3대 난제 상황을 클릭하고 AI의 사고 과정을 확인해보세요.
-                    </p>
-                </div>
-
-                <!-- Scenario Selector Tabs -->
-                <div class="flex flex-wrap gap-2 bg-surface p-1.5 rounded-xl border border-surfaceBorder" id="scenarioTabs">
-                    <button class="tab-btn px-4 py-2 rounded-lg text-xs font-mono font-semibold transition-all bg-neonCyan text-black" data-scenario="0">
-                        <i class="fa-solid fa-arrows-turn-to-dots mr-1.5"></i> 시나리오 1: 좌회전 교차로
-                    </button>
-                    <button class="tab-btn px-4 py-2 rounded-lg text-xs font-mono font-semibold transition-all text-zinc-400 hover:text-white" data-scenario="1">
-                        <i class="fa-solid fa-bus mr-1.5"></i> 시나리오 2: 정차 버스 우회
-                    </button>
-                    <button class="tab-btn px-4 py-2 rounded-lg text-xs font-mono font-semibold transition-all text-zinc-400 hover:text-white" data-scenario="2">
-                        <i class="fa-solid fa-traffic-light mr-1.5"></i> 시나리오 3: 신호등 급정거
-                    </button>
-                </div>
-            </div>
-
-            <!-- Simulator Main Console Grid -->
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                <!-- Left 7 cols: 2D Top-Down Interactive Canvas Road -->
-                <div class="lg:col-span-7 bg-surface border border-surfaceBorder rounded-2xl p-5 flex flex-col justify-between shadow-2xl relative overflow-hidden">
-                    <div class="flex items-center justify-between pb-3 border-b border-surfaceBorder mb-4 text-xs font-mono">
-                        <div class="flex items-center gap-3">
-                            <span class="text-white font-bold flex items-center gap-1.5">
-                                <i class="fa-solid fa-video text-neonCyan"></i> BIRD'S EYE VIEW (BEV) CANVAS
-                            </span>
-                            <span id="canvasStatusTag" class="px-2 py-0.5 rounded text-[10px] bg-neonRed/20 text-neonRed font-semibold border border-neonRed/30">
-                                FAST PATHWAY ONLY
-                            </span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <button id="runCorrectionBtn" class="px-3 py-1 rounded bg-neonCyan hover:bg-white text-black text-xs font-mono font-bold transition-all shadow-[0_0_10px_rgba(0,240,255,0.4)]">
-                                <i class="fa-solid fa-play mr-1"></i> Slow 보정 실행
-                            </button>
-                            <button id="resetSimBtn" class="px-2.5 py-1 rounded bg-surfaceBorder hover:bg-zinc-700 text-zinc-300 text-xs font-mono">
-                                <i class="fa-solid fa-arrow-rotate-left"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Canvas Box -->
-                    <div class="relative w-full aspect-[16/10] bg-[#0c0e17] rounded-xl border border-surfaceBorder overflow-hidden flex items-center justify-center">
-                        <canvas id="simCanvas" width="640" height="400" class="w-full h-full block"></canvas>
-
-                        <!-- Canvas Legend Overlay -->
-                        <div class="absolute bottom-3 left-3 bg-bg/90 backdrop-blur-sm border border-surfaceBorder rounded-lg px-3 py-2 text-[10px] font-mono space-y-1">
-                            <div class="flex items-center gap-2">
-                                <span class="w-3 h-0.5 bg-neonRed inline-block"></span>
-                                <span class="text-zinc-300">Fast 예측선 (충돌 위험/미흡)</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <span class="w-3 h-0.5 bg-neonCyan inline-block"></span>
-                                <span class="text-neonCyan font-bold">Slow 보정선 (안전 갱신 완료)</span>
-                            </div>
-                        </div>
-
-                        <!-- Laplace Uncertainty Meter Floating Badge -->
-                        <div class="absolute top-3 right-3 bg-bg/90 backdrop-blur-sm border border-surfaceBorder rounded-lg px-3 py-2 text-[10px] font-mono text-right">
-                            <div class="text-zinc-400">라플라스 불확실성 지수</div>
-                            <div id="uncertaintyValue" class="text-sm font-bold text-neonRed">0.87 (HIGH RISK)</div>
-                        </div>
-                    </div>
-
-                    <!-- Canvas Footnote -->
-                    <div class="mt-3 text-[11px] font-mono text-zinc-400 flex items-center justify-between">
-                        <span>좌표계: 차량 중심 Ego BEV Coordinate [-30m ~ +30m]</span>
-                        <span>샘플링 주기: 30ms (Fast) / 1000ms (Slow)</span>
-                    </div>
-                </div>
-
-                <!-- Right 5 cols: VLM Chain-of-Thought & Planning State Panel -->
-                <div class="lg:col-span-5 flex flex-col space-y-4">
-                    <!-- Scenario Description Card -->
-                    <div class="bg-surface border border-surfaceBorder rounded-2xl p-5">
-                        <div class="flex items-center justify-between mb-2">
-                            <span class="text-xs font-mono text-zinc-400" id="scenarioNumberText">SCENARIO #01</span>
-                            <span class="text-xs font-mono text-neonLime" id="scenarioMetaActionText">Meta-Action: Pending</span>
-                        </div>
-                        <h4 class="text-base font-bold text-white mb-2" id="scenarioTitleText">복잡한 교차로 비보호 좌회전</h4>
-                        <p class="text-xs text-zinc-300 leading-relaxed" id="scenarioDescText">
-                            대향 차선에서 접근하는 직진 차량이 시야 사각지대에 가려져 있어, Fast Pathway 단독으로는 성급한 좌회전 궤적을 계획할 위험이 있습니다.
-                        </p>
-                    </div>
-
-                    <!-- Terminal Style Chain-of-Thought Box -->
-                    <div class="bg-surface border border-surfaceBorder rounded-2xl p-5 flex-1 flex flex-col justify-between">
-                        <div>
-                            <div class="flex items-center justify-between pb-3 border-b border-surfaceBorder mb-3 text-xs font-mono">
-                                <span class="text-neonCyan font-bold flex items-center gap-2">
-                                    <i class="fa-solid fa-terminal"></i> VLM REASONING TERMINAL
-                                </span>
-                                <span class="text-[10px] text-zinc-400" id="terminalStatusText">IDLE</span>
-                            </div>
-
-                            <!-- Live Typing Area -->
-                            <div id="cotOutputArea" class="font-mono text-xs text-zinc-300 space-y-2.5 h-[170px] overflow-y-auto leading-relaxed">
-                                <div class="text-zinc-500">▶ 상단의 [Slow 보정 실행] 버튼을 누르면 VLM이 씬을 분석하고 생각의 사슬(Chain-of-Thought)을 출력합니다.</div>
-                            </div>
-                        </div>
-
-                        <!-- Structured Vector Output Footer -->
-                        <div class="mt-4 pt-3 border-t border-surfaceBorder space-y-2 font-mono text-[11px]">
-                            <div class="flex items-center justify-between">
-                                <span class="text-zinc-400">Planning State (Pt):</span>
-                                <span id="planningStateVector" class="text-neonLime font-bold">[0, 0, 0, 0, 0, 0, 0, 0]</span>
-                            </div>
-                            <div class="flex items-center justify-between">
-                                <span class="text-zinc-400">High-Level Direction:</span>
-                                <span id="highLevelDirection" class="text-neonCyan font-bold">STRAIGHT</span>
-                            </div>
-                            <div class="flex items-center justify-between">
-                                <span class="text-zinc-400">Target Speed Command:</span>
-                                <span id="targetSpeedCmd" class="text-white font-bold">40 km/h</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <!-- ── ENDING ─────────────────────────── -->
+    <section class="ending">
+        <div class="section-label">Contact</div>
+        <h2>Next Level System,<br>With You.</h2>
+        <p>보안이 담보된 견고한 네트워크 아키텍처 위에 최신 기술을 접목하여, 어떤 상황에서도 멈추지 않는 서비스를 함께 만들어가겠습니다.</p>
+        <a href="mailto:kimsharrrk@naver.com" class="btn btn-primary" style="font-size:1.1rem; padding:18px 40px;">합류
+            제안하기 →</a>
     </section>
 
-    <!-- SECTION 5: BENCHMARK METRICS (성과 지표) -->
-    <section id="metrics" class="py-24 border-b border-surfaceBorder bg-surface/40">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <div class="inline-block text-xs font-mono text-neonLime uppercase tracking-widest mb-3">04 · Verified Results</div>
-                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-white">
-                    숫자로 증명된 압도적 안전성과 완주율
-                </h2>
-                <p class="text-zinc-400 text-sm sm:text-base mt-4 leading-relaxed">
-                    실제 자율주행 표준 벤치마크인 <strong>nuScenes(실도로 데이터)</strong>와 <strong>CARLA Town05(폐쇄 루프 극한 시뮬레이션)</strong>에서 기록한 세계 최고 수준의 성능 지표입니다.
-                </p>
-            </div>
-
-            <!-- Metrics Grid -->
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                <!-- Metric 1: nuScenes Collision Rate Bar Chart -->
-                <div class="lg:col-span-6 bg-surface border border-surfaceBorder rounded-2xl p-7 flex flex-col justify-between">
-                    <div>
-                        <div class="flex items-center justify-between mb-6">
-                            <div>
-                                <span class="text-xs font-mono text-neonRed font-bold block">OPEN-LOOP BENCHMARK</span>
-                                <h3 class="text-xl font-bold text-white">nuScenes 평균 충돌률 (Collision Rate)</h3>
-                            </div>
-                            <span class="text-xs font-mono text-zinc-400">낮을수록 우수 (↓)</span>
-                        </div>
-
-                        <!-- Bar Comparison -->
-                        <div class="space-y-4 font-mono text-xs">
-                            <!-- Baseline 1: VAD -->
-                            <div>
-                                <div class="flex justify-between text-zinc-300 mb-1">
-                                    <span>VAD-Base (ICCV 2023)</span>
-                                    <span class="text-zinc-400">0.53%</span>
-                                </div>
-                                <div class="w-full bg-zinc-800 rounded-full h-3 overflow-hidden">
-                                    <div class="bg-zinc-600 h-full rounded-full" style="width: 100%;"></div>
-                                </div>
-                            </div>
-
-                            <!-- Baseline 2: GenAD -->
-                            <div>
-                                <div class="flex justify-between text-zinc-300 mb-1">
-                                    <span>GenAD (CVPR 2024)</span>
-                                    <span class="text-zinc-400">0.43%</span>
-                                </div>
-                                <div class="w-full bg-zinc-800 rounded-full h-3 overflow-hidden">
-                                    <div class="bg-zinc-500 h-full rounded-full" style="width: 81%;"></div>
-                                </div>
-                            </div>
-
-                            <!-- Baseline 3: UniAD -->
-                            <div>
-                                <div class="flex justify-between text-zinc-300 mb-1">
-                                    <span>UniAD (CVPR 2023 Best Paper)</span>
-                                    <span class="text-zinc-400">0.31%</span>
-                                </div>
-                                <div class="w-full bg-zinc-800 rounded-full h-3 overflow-hidden">
-                                    <div class="bg-zinc-400 h-full rounded-full" style="width: 58%;"></div>
-                                </div>
-                            </div>
-
-                            <!-- OURS: FASIONAD -->
-                            <div class="pt-2">
-                                <div class="flex justify-between text-white font-bold mb-1">
-                                    <span class="text-neonLime flex items-center gap-1.5">
-                                        <i class="fa-solid fa-crown text-neonLime"></i> FASIONAD (본 연구)
-                                    </span>
-                                    <span class="text-neonLime text-sm">0.18% (최저 달성)</span>
-                                </div>
-                                <div class="w-full bg-zinc-800 rounded-full h-4 overflow-hidden border border-neonLime/40">
-                                    <div class="bg-gradient-to-r from-neonCyan to-neonLime h-full rounded-full shadow-[0_0_12px_rgba(204,255,0,0.8)]" style="width: 34%;"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-8 pt-4 border-t border-surfaceBorder text-xs text-zinc-400 font-mono">
-                        💡 기존 최우수 모델 대비 충돌 위험을 최대 <strong class="text-neonLime">66% 이상 감소</strong>시킴
-                    </div>
-                </div>
-
-                <!-- Metric 2: CARLA Town05 Closed Loop Score -->
-                <div class="lg:col-span-6 bg-surface border border-surfaceBorder rounded-2xl p-7 flex flex-col justify-between">
-                    <div>
-                        <div class="flex items-center justify-between mb-6">
-                            <div>
-                                <span class="text-xs font-mono text-neonCyan font-bold block">CLOSED-LOOP BENCHMARK</span>
-                                <h3 class="text-xl font-bold text-white">CARLA Town05 Short 주행 점수 (DS)</h3>
-                            </div>
-                            <span class="text-xs font-mono text-zinc-400">높을수록 우수 (↑)</span>
-                        </div>
-
-                        <!-- Bar Comparison -->
-                        <div class="space-y-4 font-mono text-xs">
-                            <!-- Baseline 1: ST-P3 -->
-                            <div>
-                                <div class="flex justify-between text-zinc-300 mb-1">
-                                    <span>ST-P3 (ECCV 2022)</span>
-                                    <span class="text-zinc-400">55.14% (완주율 86.74%)</span>
-                                </div>
-                                <div class="w-full bg-zinc-800 rounded-full h-3 overflow-hidden">
-                                    <div class="bg-zinc-600 h-full rounded-full" style="width: 85%;"></div>
-                                </div>
-                            </div>
-
-                            <!-- Baseline 2: VAD -->
-                            <div>
-                                <div class="flex justify-between text-zinc-300 mb-1">
-                                    <span>VAD (ICCV 2023)</span>
-                                    <span class="text-zinc-400">64.29% (완주율 87.26%)</span>
-                                </div>
-                                <div class="w-full bg-zinc-800 rounded-full h-3 overflow-hidden">
-                                    <div class="bg-zinc-400 h-full rounded-full" style="width: 98%;"></div>
-                                </div>
-                            </div>
-
-                            <!-- OURS: FASIONAD -->
-                            <div class="pt-2">
-                                <div class="flex justify-between text-white font-bold mb-1">
-                                    <span class="text-neonCyan flex items-center gap-1.5">
-                                        <i class="fa-solid fa-crown text-neonCyan"></i> FASIONAD (본 연구)
-                                    </span>
-                                    <span class="text-neonCyan text-sm">64.83% (완주율 89.04%)</span>
-                                </div>
-                                <div class="w-full bg-zinc-800 rounded-full h-4 overflow-hidden border border-neonCyan/40">
-                                    <div class="bg-gradient-to-r from-neonBlue to-neonCyan h-full rounded-full shadow-[0_0_12px_rgba(0,240,255,0.8)]" style="width: 100%;"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-8 pt-4 border-t border-surfaceBorder text-xs text-zinc-400 font-mono">
-                        💡 좁은 골목길과 잦은 교차로가 밀집된 Town05 환경에서 역대 최다 완주율 기록
-                    </div>
-                </div>
-            </div>
-
-            <!-- Ablation Study Highlight Chips -->
-            <div class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 font-mono text-xs">
-                <div class="bg-surface border border-surfaceBorder p-4 rounded-xl flex items-center gap-3">
-                    <div class="text-neonLime text-lg"><i class="fa-solid fa-filter"></i></div>
-                    <div>
-                        <div class="text-white font-bold">정보 병목 (IB) 모듈 탑재</div>
-                        <div class="text-zinc-400">불필요 노이즈 제거로 L2 오차 0.69m 단축</div>
-                    </div>
-                </div>
-                <div class="bg-surface border border-surfaceBorder p-4 rounded-xl flex items-center gap-3">
-                    <div class="text-neonCyan text-lg"><i class="fa-solid fa-microchip"></i></div>
-                    <div>
-                        <div class="text-white font-bold">실시간 추론 속도 6.9 FPS</div>
-                        <div class="text-zinc-400">단일 RTX 3090 GPU로 실차 양산 적용 가능</div>
-                    </div>
-                </div>
-                <div class="bg-surface border border-surfaceBorder p-4 rounded-xl flex items-center gap-3">
-                    <div class="text-yellow-400 text-lg"><i class="fa-solid fa-bell"></i></div>
-                    <div>
-                        <div class="text-white font-bold">VLM Full-Prompt 전략</div>
-                        <div class="text-zinc-400">Visual+BEV 복합 프롬프트 시 충돌률 최저 0.18%</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION 6: FOOTER (감점 방지 필수 항목 & 교수님 Q&A 대비) -->
-    <footer id="team" class="py-20 border-t border-surfaceBorder bg-bg relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <!-- Team Member Requirement Section -->
-            <div class="mb-16">
-                <div class="text-center max-w-2xl mx-auto mb-10">
-                    <div class="inline-flex items-center gap-2 text-xs font-mono text-neonLime uppercase tracking-widest mb-2">
-                        <i class="fa-solid fa-users"></i> Project Contributors
-                    </div>
-                    <h3 class="text-2xl sm:text-3xl font-bold text-white">
-                        연구 및 웹페이지 제작 조원 소개
-                    </h3>
-                    <p class="text-zinc-400 text-xs sm:text-sm mt-2">
-                        과제 제출 필수 요건 : 각 조원의 개인 웹페이지 링크를 반드시 포함합니다.
-                    </p>
-                </div>
-
-                <!-- Team Cards Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-                    <!-- Member 1: Kim Geon-hui (Main Author) -->
-                    <div class="bg-surface border-2 border-neonLime/60 rounded-2xl p-6 flex flex-col justify-between shadow-[0_0_25px_rgba(204,255,0,0.15)] relative">
-                        <div class="absolute -top-3 right-4 px-2.5 py-0.5 rounded bg-neonLime text-black font-mono font-bold text-[10px] uppercase">
-                            Team Lead
-                        </div>
-                        <div>
-                            <div class="flex items-center gap-4 mb-4">
-                                <img src="./profile.png" alt="김건희 프로필" class="w-12 h-12 rounded-full object-cover border-2 border-neonLime shadow-[0_0_15px_rgba(204,255,0,0.5)]">
-                                <div>
-                                    <h4 class="text-base font-bold text-white">김건희</h4>
-                                    <span class="text-xs font-mono text-neonLime">Software & AI Engineer</span>
-                                </div>
-                            </div>
-                            <p class="text-xs text-zinc-400 leading-relaxed mb-4">
-                                시스템 아키텍처 분석, FASIONAD 인터랙티브 시뮬레이터 개발 및 웹 프레젠테이션 총괄.
-                            </p>
-                        </div>
-
-                        <div class="space-y-2 pt-4 border-t border-surfaceBorder font-mono text-xs">
-                            <!-- Direct Link to personal webpage -->
-                            <a href="./profile/index.html" target="_blank" class="w-full py-2.5 px-3 rounded-lg bg-neonLime text-black font-bold text-center block hover:bg-white transition-all shadow-md">
-                                <i class="fa-solid fa-arrow-up-right-from-square mr-1.5"></i> 개인 홈페이지 바로가기
-                            </a>
-                            <div class="flex items-center justify-between text-[11px] text-zinc-400 pt-1">
-                                <a href="https://github.com/Kimsharrrk" target="_blank" class="hover:text-neonCyan flex items-center gap-1">
-                                    <i class="fa-brands fa-github"></i> GitHub
-                                </a>
-                                <a href="mailto:kimsharrrk@naver.com" class="hover:text-neonCyan flex items-center gap-1">
-                                    <i class="fa-regular fa-envelope"></i> Email
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Member 2: Editable Team Member Slot -->
-                    <div class="bg-surface border border-surfaceBorder hover:border-zinc-500 rounded-2xl p-6 flex flex-col justify-between transition-all">
-                        <div>
-                            <div class="flex items-center gap-4 mb-4">
-                                <div class="w-12 h-12 rounded-full bg-zinc-800 text-zinc-300 font-mono font-bold flex items-center justify-center text-lg border border-surfaceBorder">
-                                    T2
-                                </div>
-                                <div>
-                                    <h4 class="text-base font-bold text-white">조원 2 (입력 대기)</h4>
-                                    <span class="text-xs font-mono text-zinc-400">Research & Presentation</span>
-                                </div>
-                            </div>
-                            <p class="text-xs text-zinc-400 leading-relaxed mb-4">
-                                자율주행 최신 논문 서베이, 5분 발표 대본 작성 및 벤치마크 지표 비교 분석 담당.
-                            </p>
-                        </div>
-
-                        <div class="space-y-2 pt-4 border-t border-surfaceBorder font-mono text-xs">
-                            <a href="#" onclick="alert('조원 2의 개인 웹페이지 링크를 index.html 파일의 해당 버튼 href에 입력해주세요!'); return false;" class="w-full py-2.5 px-3 rounded-lg bg-surfaceBorder text-zinc-200 font-medium text-center block hover:bg-zinc-700 transition-all">
-                                <i class="fa-solid fa-arrow-up-right-from-square mr-1.5"></i> 개인 홈페이지 바로가기
-                            </a>
-                            <div class="text-[10px] text-zinc-400 text-center">
-                                * 링크 수정: HTML 내 href 속성 변경
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Member 3: Editable Team Member Slot -->
-                    <div class="bg-surface border border-surfaceBorder hover:border-zinc-500 rounded-2xl p-6 flex flex-col justify-between transition-all">
-                        <div>
-                            <div class="flex items-center gap-4 mb-4">
-                                <div class="w-12 h-12 rounded-full bg-zinc-800 text-zinc-300 font-mono font-bold flex items-center justify-center text-lg border border-surfaceBorder">
-                                    T3
-                                </div>
-                                <div>
-                                    <h4 class="text-base font-bold text-white">조원 3 (입력 대기)</h4>
-                                    <span class="text-xs font-mono text-zinc-400">Simulation & Design</span>
-                                </div>
-                            </div>
-                            <p class="text-xs text-zinc-400 leading-relaxed mb-4">
-                                3대 주행 시나리오 엣지 케이스 정리, 웹 그래픽 리소스 및 Q&A 답변 시트 정리.
-                            </p>
-                        </div>
-
-                        <div class="space-y-2 pt-4 border-t border-surfaceBorder font-mono text-xs">
-                            <a href="#" onclick="alert('조원 3의 개인 웹페이지 링크를 index.html 파일의 해당 버튼 href에 입력해주세요!'); return false;" class="w-full py-2.5 px-3 rounded-lg bg-surfaceBorder text-zinc-200 font-medium text-center block hover:bg-zinc-700 transition-all">
-                                <i class="fa-solid fa-arrow-up-right-from-square mr-1.5"></i> 개인 홈페이지 바로가기
-                            </a>
-                            <div class="text-[10px] text-zinc-400 text-center">
-                                * 링크 수정: HTML 내 href 속성 변경
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Professor Q&A Defense Quick Modal Trigger & Info Banner -->
-            <div class="bg-gradient-to-r from-surface via-zinc-900 to-surface border border-neonCyan/30 rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6">
-                <div class="space-y-2 text-center md:text-left">
-                    <div class="inline-flex items-center gap-2 text-xs font-mono text-neonCyan font-bold">
-                        <i class="fa-solid fa-shield-halved"></i> 교수님 5분 질의응답 (Q&A) 방어 치트시트
-                    </div>
-                    <h4 class="text-lg sm:text-xl font-bold text-white">
-                        "질문이 적을 시 교수가 질문 예정 (내용 이해도 확인)"
-                    </h4>
-                    <p class="text-xs sm:text-sm text-zinc-400 max-w-2xl">
-                        시간차 지연(Latency), VLM 환각(Hallucination), 라플라스 불확실성 원리 등 단골 질문에 대한 논문 기반 모범 답변을 준비했습니다.
-                    </p>
-                </div>
-                <button id="openQnaBtn" class="px-5 py-3 rounded-xl bg-neonCyan/10 border border-neonCyan text-neonCyan hover:bg-neonCyan hover:text-black transition-all font-mono text-xs font-bold whitespace-nowrap flex items-center gap-2">
-                    <i class="fa-solid fa-book-open"></i> Q&A 예상 질문 및 모범 답변 열기
-                </button>
-            </div>
-
-            <!-- Bottom Copyright & Academic Reference -->
-            <div class="mt-12 pt-8 border-t border-surfaceBorder flex flex-col sm:flex-row items-center justify-between text-xs font-mono text-zinc-400 gap-4">
-                <div>
-                    제출 대상: 국립공주대학교 교수님 메일 (leeck@kongju.ac.kr)
-                </div>
-                <div>
-                    Paper: Qian et al., arXiv:2411.18013v1 (Tsinghua Univ, Waseda Univ, UMN)
-                </div>
-            </div>
-        </div>
+    <footer>
+        <p>© 2026 KIM GEON HUI · kimsharrrk@naver.com</p>
     </footer>
 
-    <!-- PROFESSOR Q&A MODAL DIALOG -->
-    <div id="qnaModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4">
-        <div class="bg-surface border border-surfaceBorder rounded-2xl max-w-3xl w-full max-h-[85vh] overflow-y-auto p-6 sm:p-8 relative shadow-2xl">
-            <button id="closeQnaBtn" class="absolute top-5 right-5 text-zinc-400 hover:text-white text-lg">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-
-            <div class="flex items-center gap-3 mb-6">
-                <div class="w-10 h-10 rounded-xl bg-neonCyan/10 border border-neonCyan/40 flex items-center justify-center text-neonCyan">
-                    <i class="fa-solid fa-graduation-cap"></i>
-                </div>
-                <div>
-                    <h3 class="text-lg font-bold text-white">교수님 5분 질의응답 완벽 대비 가이드</h3>
-                    <span class="text-xs font-mono text-neonCyan">FASIONAD 내용 이해도 검증 핵심 포인트</span>
-                </div>
-            </div>
-
-            <div class="space-y-6 text-xs sm:text-sm text-zinc-300">
-                <!-- Q1 -->
-                <div class="bg-bg/80 border border-surfaceBorder rounded-xl p-4">
-                    <div class="text-neonLime font-bold mb-2 flex items-center gap-2 font-mono">
-                        <i class="fa-solid fa-circle-question"></i> Q1. Fast(30ms)와 Slow(1초 이상)의 극심한 시간차를 어떻게 충돌 없이 비동기 융합했습니까?
-                    </div>
-                    <p class="text-zinc-400 leading-relaxed pl-6">
-                        <strong>답변 포인트:</strong> Slow Pathway의 VLM은 직접 차량의 액추에이터(조향각/스로틀)를 실시간 조작하지 않습니다. 대신 고수준의 'Planning State Vector (Pt)'와 'Meta-Action (At)'만을 비동기 생성하여 Fast Pathway의 Ego Token과 Cross-Attention으로 부드럽게 결합합니다. Fast Pathway는 평상시 지연 없이 6.9+ FPS로 달리다가, Slow의 피드백이 도착했을 때만 잠재 공간(Latent Space)에서 궤적을 미세 재보정하므로 차량이 멈추거나 덜컹거리지 않습니다.
-                    </p>
-                </div>
-
-                <!-- Q2 -->
-                <div class="bg-bg/80 border border-surfaceBorder rounded-xl p-4">
-                    <div class="text-neonCyan font-bold mb-2 flex items-center gap-2 font-mono">
-                        <i class="fa-solid fa-circle-question"></i> Q2. 거대 VLM이 엉뚱한 판단을 내리는 환각(Hallucination) 위험은 어떻게 막았나요?
-                    </div>
-                    <p class="text-zinc-400 leading-relaxed pl-6">
-                        <strong>답변 포인트:</strong> 본 연구에서는 <strong>정보 병목 이론(Information Bottleneck, IB)</strong>을 도입했습니다. 주행에 불필요한 시각적/언어적 노이즈를 3계층 MLP를 통해 걸러내고, PPO(Proximal Policy Optimization) 기반의 보상 유도 손실함수(L_rvlm)로 VLM을 미세조정했습니다. 또한 VLM의 피드백 보상 점수가 지나치게 신뢰도가 낮으면 이를 즉시 폐기하고 기존 안전 궤적을 유지하는 방어 로직이 적용되어 있습니다.
-                    </p>
-                </div>
-
-                <!-- Q3 -->
-                <div class="bg-bg/80 border border-surfaceBorder rounded-xl p-4">
-                    <div class="text-yellow-400 font-bold mb-2 flex items-center gap-2 font-mono">
-                        <i class="fa-solid fa-circle-question"></i> Q3. 일반적인 가우시안 대신 왜 라플라스 분포(Laplace Distribution)를 썼습니까?
-                    </div>
-                    <p class="text-zinc-400 leading-relaxed pl-6">
-                        <strong>답변 포인트:</strong> 가우시안 분포는 평균 근처 데이터에 최적화되어 있으나 제곱 오차(L2)를 사용하여 이상치에 민감합니다. 반면 라플라스 분포는 <strong>두터운 꼬리(Heavy-tailed) 특성과 L1-절대오차 기반</strong>으로 설계되어, 도로 위에서 드물게 발생하는 극단적 노이즈나 돌발 이상치(Outlier)를 지나치게 증폭시키지 않고도 안정적으로 불확실성을 모델링할 수 있기 때문입니다.
-                    </p>
-                </div>
-            </div>
-
-            <div class="mt-6 pt-4 border-t border-surfaceBorder text-right">
-                <button id="closeQnaModalBtn" class="px-4 py-2 rounded-lg bg-surfaceBorder hover:bg-zinc-700 text-white text-xs font-mono">
-                    닫기
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- JAVASCRIPT: SIMULATOR CANVAS, SCENARIOS, TIMER & INTERACTION -->
-    <script>
-        // -------------------------------------------------------------
-        // 1. SCENARIO DATA (Based on Paper Fig 4 & Fig 6)
-        // -------------------------------------------------------------
-        const SCENARIOS = [
-            {
-                id: 0,
-                number: "SCENARIO #01",
-                title: "복잡한 교차로 비보호 좌회전 (Left Turn Intersection)",
-                metaAction: "Meta-Action: Deceleration + Left Yield",
-                desc: "대향 차선에서 접근하는 직진 차량이 사각지대에 가려져 있어, Fast Pathway 단독으로는 성급하게 좌회전 궤적을 생성해 대향차와의 충돌 위험이 발생합니다.",
-                uncertainty: "0.89 (HIGH RISK)",
-                planningState: "[0, 0, 0, 0, 0, 1, 1, 1]",
-                direction: "LEFT_TURN",
-                speed: "18 km/h (Slow Down)",
-                cotLogs: [
-                    "▶ [Fast Pathway]: 카메라 BEV 인스턴스 토큰 추출 완료 (6.9 FPS).",
-                    "⚠ [Laplace Uncertainty]: 대향차량 궤적 중첩 감지 (Score: 0.89 > Threshold 0.65).",
-                    "⚡ [Switch Activated]: Slow Pathway (Qwen-VL) 긴급 호출!",
-                    "👁 [VLM Visual Prompt]: 교차로 반대편 대향 승용차 접근 중. 시야 차폐율 42%.",
-                    "🧠 [Thinking Chain]: 도로 구조상 좌회전 진행 중이나 안전 간격 미달. 급진입 금지.",
-                    "✅ [High-Level Plan]: <Speed> Decelerations, <Direction> Left.",
-                    "🔄 [Feedback Fusion]: Ego Token에 우회 대기 벡터 주입 → 안전 곡선 궤적 갱신 완료!"
-                ],
-                // Simulation Geometry Data
-                draw: (ctx, step, progress) => {
-                    // Draw Intersection Road
-                    ctx.fillStyle = "#161926";
-                    // Vertical road
-                    ctx.fillRect(260, 0, 120, 400);
-                    // Horizontal road
-                    ctx.fillRect(0, 140, 640, 120);
-
-                    // Road Markings (Yellow double center lines)
-                    ctx.strokeStyle = "rgba(255, 204, 0, 0.4)";
-                    ctx.lineWidth = 2;
-                    ctx.setLineDash([10, 10]);
-                    // Vertical center
-                    ctx.beginPath();
-                    ctx.moveTo(320, 0); ctx.lineTo(320, 140);
-                    ctx.moveTo(320, 260); ctx.lineTo(320, 400);
-                    ctx.stroke();
-                    // Horizontal center
-                    ctx.beginPath();
-                    ctx.moveTo(0, 200); ctx.lineTo(260, 200);
-                    ctx.moveTo(380, 200); ctx.lineTo(640, 200);
-                    ctx.stroke();
-                    ctx.setLineDash([]);
-
-                    // Oncoming Vehicle (Approaching from top heading down)
-                    ctx.fillStyle = "#ff2a5f";
-                    ctx.fillRect(280, 50 + progress * 20, 26, 44);
-                    ctx.strokeStyle = "rgba(255,42,95,0.8)";
-                    ctx.strokeRect(280, 50 + progress * 20, 26, 44);
-                    ctx.fillStyle = "#fff";
-                    ctx.font = "9px 'JetBrains Mono'";
-                    ctx.fillText("ONCOMING", 265, 45 + progress * 20);
-
-                    // Ego Vehicle (Bottom going up to turn left)
-                    ctx.fillStyle = "#ccff00";
-                    ctx.fillRect(334, 320 - progress * 15, 26, 46);
-                    ctx.strokeStyle = "#fff";
-                    ctx.strokeRect(334, 320 - progress * 15, 26, 46);
-                    ctx.fillStyle = "#000";
-                    ctx.font = "bold 9px 'JetBrains Mono'";
-                    ctx.fillText("EGO", 338, 345 - progress * 15);
-
-                    // Trajectory lines
-                    // Red Line: Fast Pathway (Overly aggressive sharp turn colliding)
-                    ctx.strokeStyle = "rgba(255, 42, 95, 0.9)";
-                    ctx.lineWidth = 3;
-                    ctx.beginPath();
-                    ctx.moveTo(347, 320 - progress * 15);
-                    ctx.quadraticCurveTo(347, 180, 150, 170);
-                    ctx.stroke();
-
-                    // Blue Line: Slow Pathway (Smooth yield arc)
-                    if (step === "corrected") {
-                        ctx.strokeStyle = "rgba(0, 240, 255, 1)";
-                        ctx.lineWidth = 4;
-                        ctx.shadowColor = "#00f0ff";
-                        ctx.shadowBlur = 10;
-                        ctx.beginPath();
-                        ctx.moveTo(347, 320 - progress * 15);
-                        // Waiting deeper in the intersection
-                        ctx.quadraticCurveTo(347, 230, 200, 175);
-                        ctx.stroke();
-                        ctx.shadowBlur = 0;
-                    }
-                }
-            },
-            {
-                id: 1,
-                number: "SCENARIO #02",
-                title: "정차 버스 우회 및 사각지대 보행자 (Overtaking Stopped Bus)",
-                metaAction: "Meta-Action: Yield & Right Lane Offset",
-                desc: "좌측 버스 정류장에 대형 버스가 정차 중입니다. 버스 앞 사각지대에서 하차 승객이 튀어나올 수 있으나 Fast Pathway는 단순 직진 가속을 시도합니다.",
-                uncertainty: "0.92 (CRITICAL)",
-                planningState: "[0, 0, 0, 0, 1, 0, 1, 0]",
-                direction: "RIGHT_OFFSET",
-                speed: "25 km/h (Yield)",
-                cotLogs: [
-                    "▶ [Fast Pathway]: 전방 도로 직선 인식, 속도 45km/h 유지 계획 수립.",
-                    "⚠ [Laplace Uncertainty]: 좌측 정차 버스 바운딩 박스 오차 급증 (Uncertainty: 0.92).",
-                    "⚡ [Switch Activated]: Slow Pathway 호출, Front Camera View 투영 분석.",
-                    "👁 [VLM Visual Prompt]: <Bus stopping on left>. 승객 하차 및 가림 영역 위험 식별.",
-                    "🧠 [Thinking Chain]: 버스 앞쪽 보행자 출현 가능성 높음. 차간 거리 및 우측 이격 필수.",
-                    "✅ [High-Level Plan]: <Speed> Decelerations, <Direction> Right.",
-                    "🔄 [Feedback Fusion]: 궤적을 우측 차선 바깥으로 1.8m 부드럽게 오프셋 재계획 완료!"
-                ],
-                draw: (ctx, step, progress) => {
-                    // Straight 3-lane road
-                    ctx.fillStyle = "#161926";
-                    ctx.fillRect(0, 100, 640, 200);
-
-                    // Lane dividers
-                    ctx.strokeStyle = "rgba(255, 255, 255, 0.2)";
-                    ctx.lineWidth = 2;
-                    ctx.setLineDash([15, 15]);
-                    ctx.beginPath();
-                    ctx.moveTo(0, 166); ctx.lineTo(640, 166);
-                    ctx.moveTo(0, 233); ctx.lineTo(640, 233);
-                    ctx.stroke();
-                    ctx.setLineDash([]);
-
-                    // Stopped Bus on Left Lane (x: 280, y: 110)
-                    ctx.fillStyle = "#f59e0b";
-                    ctx.fillRect(300, 115, 90, 42);
-                    ctx.strokeStyle = "#fff";
-                    ctx.strokeRect(300, 115, 90, 42);
-                    ctx.fillStyle = "#000";
-                    ctx.font = "bold 10px 'JetBrains Mono'";
-                    ctx.fillText("BUS STOPPED", 305, 140);
-
-                    // Pedestrian silhouette near front of bus
-                    ctx.fillStyle = "#ff2a5f";
-                    ctx.beginPath();
-                    ctx.arc(405, 120, 6, 0, Math.PI * 2);
-                    ctx.fill();
-                    ctx.fillStyle = "#ff2a5f";
-                    ctx.font = "9px 'JetBrains Mono'";
-                    ctx.fillText("PEDESTRIAN", 390, 105);
-
-                    // Ego vehicle in middle lane (x: 100, y: 175)
-                    ctx.fillStyle = "#ccff00";
-                    ctx.fillRect(100 + progress * 20, 175, 46, 26);
-                    ctx.strokeStyle = "#fff";
-                    ctx.strokeRect(100 + progress * 20, 175, 46, 26);
-                    ctx.fillStyle = "#000";
-                    ctx.font = "bold 9px 'JetBrains Mono'";
-                    ctx.fillText("EGO", 112 + progress * 20, 192);
-
-                    // Fast Pathway Trajectory (Red: Straight through dangerous zone)
-                    ctx.strokeStyle = "rgba(255, 42, 95, 0.9)";
-                    ctx.lineWidth = 3;
-                    ctx.beginPath();
-                    ctx.moveTo(146 + progress * 20, 188);
-                    ctx.lineTo(480, 188);
-                    ctx.stroke();
-
-                    // Slow Pathway Trajectory (Blue: Steering right into 3rd lane to yield)
-                    if (step === "corrected") {
-                        ctx.strokeStyle = "rgba(0, 240, 255, 1)";
-                        ctx.lineWidth = 4;
-                        ctx.shadowColor = "#00f0ff";
-                        ctx.shadowBlur = 10;
-                        ctx.beginPath();
-                        ctx.moveTo(146 + progress * 20, 188);
-                        ctx.bezierCurveTo(240, 188, 270, 250, 480, 250);
-                        ctx.stroke();
-                        ctx.shadowBlur = 0;
-                    }
-                }
-            },
-            {
-                id: 2,
-                number: "SCENARIO #03",
-                title: "적색 신호등 및 전방 정지 차량 급정거 (Emergency Stop at Red Light)",
-                metaAction: "Meta-Action: Stop & Safety Distance",
-                desc: "전방 교차로에 적색 신호등이 켜져 있고 선행 차량이 정지해 있습니다. 비전 인식 노이즈 시 Fast Pathway가 제동 타이밍을 놓치는 것을 Slow VLM이 방지합니다.",
-                uncertainty: "0.85 (HIGH RISK)",
-                planningState: "[1, 1, 1, 0, 1, 0, 1, 0]",
-                direction: "STRAIGHT_STOP",
-                speed: "0 km/h (Full Stop)",
-                cotLogs: [
-                    "▶ [Fast Pathway]: 목표 속도 감속 프로파일 계산 중 (가속도 1.2m/s²).",
-                    "⚠ [Laplace Uncertainty]: 신호등 클래스 및 선행차 정지 여부 불확실성 감지.",
-                    "⚡ [Switch Activated]: Slow Pathway 호출, 신호등 의미론적 분석.",
-                    "👁 [VLM Visual Prompt]: <Traffic light: RED>, <Lead vehicle: FULL STOP>.",
-                    "🧠 [Thinking Chain]: 교차로 정지선 전방 15m. 현재 감속률로는 안전거리 침범 위험.",
-                    "✅ [High-Level Plan]: <Speed> Stop, <Direction> Straight.",
-                    "🔄 [Feedback Fusion]: 제동 개시 시점 1.2초 앞당김 → 정지선 앞 3m 완전 정차 궤적 확정!"
-                ],
-                draw: (ctx, step, progress) => {
-                    // Straight road towards intersection stop line
-                    ctx.fillStyle = "#161926";
-                    ctx.fillRect(0, 100, 640, 200);
-
-                    // Stop Line
-                    ctx.fillStyle = "#ffffff";
-                    ctx.fillRect(450, 100, 12, 200);
-                    ctx.fillStyle = "#a1a1aa";
-                    ctx.font = "10px 'JetBrains Mono'";
-                    ctx.fillText("STOP LINE", 430, 90);
-
-                    // Traffic Light Pole & Light (Red)
-                    ctx.fillStyle = "#27272a";
-                    ctx.fillRect(480, 40, 50, 24);
-                    // Red Light Bulb Glowing
-                    ctx.fillStyle = "#ff2a5f";
-                    ctx.shadowColor = "#ff2a5f";
-                    ctx.shadowBlur = 12;
-                    ctx.beginPath();
-                    ctx.arc(495, 52, 7, 0, Math.PI * 2);
-                    ctx.fill();
-                    ctx.shadowBlur = 0;
-                    // Yellow and Green off
-                    ctx.fillStyle = "#471520";
-                    ctx.beginPath();
-                    ctx.arc(515, 52, 6, 0, Math.PI * 2);
-                    ctx.fill();
-
-                    // Stopped Leading Vehicle in front of stop line
-                    ctx.fillStyle = "#3b82f6";
-                    ctx.fillRect(370, 175, 46, 26);
-                    ctx.strokeStyle = "#fff";
-                    ctx.strokeRect(370, 175, 46, 26);
-                    ctx.fillStyle = "#fff";
-                    ctx.font = "9px 'JetBrains Mono'";
-                    ctx.fillText("CAR #1", 376, 192);
-
-                    // Ego Vehicle behind
-                    ctx.fillStyle = "#ccff00";
-                    ctx.fillRect(100 + progress * 15, 175, 46, 26);
-                    ctx.strokeStyle = "#fff";
-                    ctx.strokeRect(100 + progress * 15, 175, 46, 26);
-                    ctx.fillStyle = "#000";
-                    ctx.font = "bold 9px 'JetBrains Mono'";
-                    ctx.fillText("EGO", 112 + progress * 15, 192);
-
-                    // Fast Pathway Trajectory (Red: Late braking, overshooting into leading car)
-                    ctx.strokeStyle = "rgba(255, 42, 95, 0.9)";
-                    ctx.lineWidth = 3;
-                    ctx.beginPath();
-                    ctx.moveTo(146 + progress * 15, 188);
-                    ctx.lineTo(390, 188); // Crashes into car #1
-                    ctx.stroke();
-
-                    // Slow Pathway Trajectory (Blue: Early smooth braking stopping at 320)
-                    if (step === "corrected") {
-                        ctx.strokeStyle = "rgba(0, 240, 255, 1)";
-                        ctx.lineWidth = 4;
-                        ctx.shadowColor = "#00f0ff";
-                        ctx.shadowBlur = 10;
-                        ctx.beginPath();
-                        ctx.moveTo(146 + progress * 15, 188);
-                        ctx.lineTo(325, 188); // Stops safely 45m behind car #1
-                        ctx.stroke();
-                        ctx.shadowBlur = 0;
-
-                        // Safe stop point indicator circle
-                        ctx.fillStyle = "#00f0ff";
-                        ctx.beginPath();
-                        ctx.arc(325, 188, 5, 0, Math.PI * 2);
-                        ctx.fill();
-                    }
-                }
-            }
-        ];
-
-        // -------------------------------------------------------------
-        // 2. SIMULATOR STATE & CONTROLLER
-        // -------------------------------------------------------------
-        let currentScenarioIdx = 0;
-        let simState = "initial"; // "initial" or "corrected"
-        let animProgress = 0;
-        let animDirection = 1;
-        let typingTimeout = null;
-
-        const canvas = document.getElementById("simCanvas");
-        const ctx = canvas.getContext("2d");
-
-        function renderCanvas() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            SCENARIOS[currentScenarioIdx].draw(ctx, simState, animProgress);
-
-            // Subtle loop animation for dynamic feeling
-            animProgress += 0.008 * animDirection;
-            if (animProgress > 1) animDirection = -1;
-            if (animProgress < 0) animDirection = 1;
-
-            requestAnimationFrame(renderCanvas);
-        }
-
-        function loadScenario(idx) {
-            currentScenarioIdx = idx;
-            simState = "initial";
-            const sc = SCENARIOS[idx];
-
-            // Update UI Texts
-            document.getElementById("scenarioNumberText").textContent = sc.number;
-            document.getElementById("scenarioTitleText").textContent = sc.title;
-            document.getElementById("scenarioMetaActionText").textContent = sc.metaAction;
-            document.getElementById("scenarioDescText").textContent = sc.desc;
-            document.getElementById("uncertaintyValue").textContent = sc.uncertainty;
-            document.getElementById("uncertaintyValue").className = "text-sm font-bold text-neonRed";
-            
-            document.getElementById("canvasStatusTag").textContent = "FAST PATHWAY ONLY";
-            document.getElementById("canvasStatusTag").className = "px-2 py-0.5 rounded text-[10px] bg-neonRed/20 text-neonRed font-semibold border border-neonRed/30";
-
-            document.getElementById("terminalStatusText").textContent = "WAITING FOR CORRECTION";
-            document.getElementById("planningStateVector").textContent = "[0, 0, 0, 0, 0, 0, 0, 0]";
-            document.getElementById("highLevelDirection").textContent = "NORMAL";
-            document.getElementById("targetSpeedCmd").textContent = "45 km/h";
-
-            // Reset Terminal
-            const cotArea = document.getElementById("cotOutputArea");
-            cotArea.innerHTML = `<div class="text-zinc-500">▶ 상단의 [Slow 보정 실행] 버튼을 누르면 VLM이 씬을 분석하고 생각의 사슬(Chain-of-Thought)을 출력합니다.</div>`;
-
-            // Update Active Tab Button
-            document.querySelectorAll(".tab-btn").forEach((btn, i) => {
-                if (i === idx) {
-                    btn.className = "tab-btn px-4 py-2 rounded-lg text-xs font-mono font-semibold transition-all bg-neonCyan text-black";
-                } else {
-                    btn.className = "tab-btn px-4 py-2 rounded-lg text-xs font-mono font-semibold transition-all text-zinc-400 hover:text-white";
-                }
-            });
-        }
-
-        function runSlowCorrection() {
-            if (simState === "corrected") return;
-            const sc = SCENARIOS[currentScenarioIdx];
-            
-            simState = "corrected";
-            document.getElementById("canvasStatusTag").textContent = "DUAL-FUSION ACTIVE";
-            document.getElementById("canvasStatusTag").className = "px-2 py-0.5 rounded text-[10px] bg-neonCyan/20 text-neonCyan font-semibold border border-neonCyan/30";
-            
-            document.getElementById("uncertaintyValue").textContent = "0.08 (RESOLVED)";
-            document.getElementById("uncertaintyValue").className = "text-sm font-bold text-neonLime";
-
-            document.getElementById("terminalStatusText").textContent = "VLM REASONING COMPLETE";
-            document.getElementById("planningStateVector").textContent = sc.planningState;
-            document.getElementById("highLevelDirection").textContent = sc.direction;
-            document.getElementById("targetSpeedCmd").textContent = sc.speed;
-
-            // Animate Terminal Typing Effect
-            const cotArea = document.getElementById("cotOutputArea");
-            cotArea.innerHTML = "";
-            if (typingTimeout) clearTimeout(typingTimeout);
-
-            let logIndex = 0;
-            function typeNextLog() {
-                if (logIndex < sc.cotLogs.length) {
-                    const line = document.createElement("div");
-                    const text = sc.cotLogs[logIndex];
-                    if (text.includes("⚠")) line.className = "text-yellow-400";
-                    else if (text.includes("⚡") || text.includes("🧠")) line.className = "text-neonCyan font-medium";
-                    else if (text.includes("✅") || text.includes("🔄")) line.className = "text-neonLime font-bold";
-                    else line.className = "text-zinc-300";
-
-                    line.textContent = text;
-                    cotArea.appendChild(line);
-                    cotArea.scrollTop = cotArea.scrollHeight;
-
-                    logIndex++;
-                    typingTimeout = setTimeout(typeNextLog, 320);
-                }
-            }
-            typeNextLog();
-        }
-
-        // Event Listeners for Tabs and Buttons
-        document.querySelectorAll(".tab-btn").forEach(btn => {
-            btn.addEventListener("click", () => {
-                const idx = parseInt(btn.getAttribute("data-scenario"));
-                loadScenario(idx);
-            });
-        });
-
-        document.getElementById("runCorrectionBtn").addEventListener("click", runSlowCorrection);
-        document.getElementById("resetSimBtn").addEventListener("click", () => loadScenario(currentScenarioIdx));
-
-        // Start Canvas Render Loop
-        loadScenario(0);
-        renderCanvas();
-
-        // -------------------------------------------------------------
-        // 3. PRESENTATION TIMER (05:00 COUNTDOWN)
-        // -------------------------------------------------------------
-        let timerSeconds = 300; // 5 minutes
-        let timerRunning = false;
-        let timerInterval = null;
-
-        const timerDisplay = document.getElementById("timerDisplay");
-        const timerToggleBtn = document.getElementById("timerToggleBtn");
-        const timerIcon = document.getElementById("timerIcon");
-        const timerResetBtn = document.getElementById("timerResetBtn");
-
-        function updateTimerUI() {
-            const mins = Math.floor(timerSeconds / 60);
-            const secs = timerSeconds % 60;
-            timerDisplay.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-            
-            if (timerSeconds <= 60 && timerSeconds > 0) {
-                timerDisplay.className = "font-bold text-yellow-400 tracking-widest";
-            } else if (timerSeconds === 0) {
-                timerDisplay.className = "font-bold text-neonRed tracking-widest pulse-active";
-            } else {
-                timerDisplay.className = "font-bold text-white tracking-widest";
-            }
-        }
-
-        timerToggleBtn.addEventListener("click", () => {
-            if (timerRunning) {
-                clearInterval(timerInterval);
-                timerRunning = false;
-                timerIcon.className = "fa-solid fa-play text-[10px]";
-            } else {
-                if (timerSeconds === 0) timerSeconds = 300;
-                timerInterval = setInterval(() => {
-                    if (timerSeconds > 0) {
-                        timerSeconds--;
-                        updateTimerUI();
-                    } else {
-                        clearInterval(timerInterval);
-                        timerRunning = false;
-                        timerIcon.className = "fa-solid fa-play text-[10px]";
-                    }
-                }, 1000);
-                timerRunning = true;
-                timerIcon.className = "fa-solid fa-pause text-[10px]";
-            }
-        });
-
-        timerResetBtn.addEventListener("click", () => {
-            clearInterval(timerInterval);
-            timerRunning = false;
-            timerSeconds = 300;
-            timerIcon.className = "fa-solid fa-play text-[10px]";
-            updateTimerUI();
-        });
-
-        // -------------------------------------------------------------
-        // 4. PROFESSOR Q&A MODAL CONTROLLER
-        // -------------------------------------------------------------
-        const qnaModal = document.getElementById("qnaModal");
-        const openQnaBtn = document.getElementById("openQnaBtn");
-        const closeQnaBtn = document.getElementById("closeQnaBtn");
-        const closeQnaModalBtn = document.getElementById("closeQnaModalBtn");
-
-        function openModal() {
-            qnaModal.classList.remove("hidden");
-            qnaModal.classList.add("flex");
-        }
-
-        function closeModal() {
-            qnaModal.classList.add("hidden");
-            qnaModal.classList.remove("flex");
-        }
-
-        openQnaBtn.addEventListener("click", openModal);
-        closeQnaBtn.addEventListener("click", closeModal);
-        closeQnaModalBtn.addEventListener("click", closeModal);
-        qnaModal.addEventListener("click", (e) => {
-            if (e.target === qnaModal) closeModal();
-        });
-    </script>
 </body>
+
 </html>
